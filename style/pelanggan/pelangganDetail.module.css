@@ -1,0 +1,106 @@
+/* pelangganDetail.module.css */
+.main { 
+    flex: 1; /* Mengambil sisa ruang untuk konten utama */
+    padding: 10px; /* Jarak di sekitar konten utama */
+    background-color: #ffffff; /* Warna latar belakang konten utama */
+    margin-left: 200px; /* Memberi ruang antara sidebar dan konten utama */
+    height:auto;
+}
+
+.pageTitle {
+    font-family: 'Poppins', sans-serif; /* Gunakan font Poppins */
+    font-size: 26px; /* Ukuran font untuk judul */
+    margin-bottom: 20px; /* Jarak di bawah judul */
+}
+
+/* Garis Pemisah */
+.separator {
+    margin: 20px 0; /* Jarak di bawah judul */
+    border: 1px solid #e0e0e0; /* Garis pemisah */
+}
+
+/* Judul Ringkasan Penjualan */
+.detailPelangganTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    margin-bottom: 20px; /* Jarak di bawah subjudul */
+    color: #375BB2; /* Warna untuk subjudul */
+}
+
+/* Kontainer untuk detail pelanggan */
+.detailsContainer {
+    display: flex; /* Mengatur sisa konten dalam baris */
+    flex-direction: column; /* Tumpuk detail dalam kolom */
+    margin-top: 20px; /* Jarak di atas untuk memisahkan dari judul */
+}
+
+/* Gaya untuk setiap detail */
+.detailRow {
+    font-family: 'poppins', sans-serif;
+    display: flex; /* Menyusun label dan nilai dalam baris */
+    justify-content: flex-start; /* Memisahkan label dan nilai */
+    margin-bottom: 10px; /* Jarak di antara baris */
+    align-items: center;
+}
+
+/* Gaya untuk label */
+.label {
+    font-weight: bold; /* Menebalkan teks label */
+    color: #1d2c3a; /* Warna teks label */
+    flex-basis: 13%; /* Lebar untuk label agar konsisten */
+    margin-right: 10px;
+}
+
+/* Gaya untuk detail box */
+.detailBox {
+    padding: 10px; /* Ruang di dalam kotak */
+    border-radius: 8px; /* Sudut melengkung untuk kotak */
+    background-color: #f9f9f9; /* Warna latar belakang kotak */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    flex-grow: 1; /* Memastikan kotak mengisi ruang yang tersedia */
+    text-align: left;
+}
+
+/* Kontainer untuk password dan ikon mata */
+.passwordContainer {
+    display: flex; /* Menggunakan flex untuk menyusun input password dan ikon mata */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    position: relative; /* Mengatur posisi relatif untuk penempatan ikon */
+    flex-grow: 1;
+}
+
+/* Input di dalam passwordContainer */
+.passwordContainer input {
+    width: 100%; /* Memastikan input mengambil lebar penuh */
+    padding-right: 40px; /* Menambah ruang di kanan untuk ikon */
+}
+
+/* Ikon mata */
+.eyeIcon {
+    position: absolute; /* Mengatur posisi absolut ikon */
+    right: 10px; /* Menempatkan ikon di kanan */
+    cursor: pointer; /* Menunjukkan ikon dapat diklik */
+    color: #888; /* Warna ikon default */
+    transition: color 0.2s; /* Menambahkan transisi untuk efek hover */
+}
+
+.eyeIcon:hover {
+    color: #333; /* Warna ikon saat di-hover */
+}
+
+.buttonContainer {
+    display: flex; /* Menyusun tombol dalam baris */
+    justify-content: flex-end; /* Memisahkan tombol ke kanan */
+    margin-top: 20px; /* Beri jarak atas untuk memisahkan dari input */
+}
+
+.backButton {
+    font-family: 'poppins', sans-serif;
+    font-weight: 550;
+    color: #F5F6FA; /* Membuat latar belakang transparan */
+    background-color: #1C3853; /* Warna teks pada tombol */
+    border: none;
+    border-radius: 10px; /* Sudut melengkung untuk tombol */
+    padding: 10px 15px; /* Padding di dalam tombol */
+    cursor: pointer; /* Menunjukkan tombol dapat diklik */
+}

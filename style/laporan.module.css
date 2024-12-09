@@ -1,0 +1,283 @@
+/* laporan.module.css */
+.main {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    margin-left: 200px;
+    height: auto;
+}
+
+.pageTitle {
+    font-family: 'poppins', sans-serif;
+    font-size: 26px; /* Ukuran font untuk judul halaman */
+    margin-bottom: 20px; /* Jarak di bawah judul */
+}
+
+/* Garis Pemisah */
+.separator {
+    margin: 20px 0; /* Jarak di bawah judul */
+    border: 1px solid #e0e0e0; /* Garis pemisah */
+}
+
+.inputContainer {
+    font-family: 'poppins', sans-serif;
+    display: flex; /* Menyelaraskan input dalam baris */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    margin-bottom: 20px; /* Jarak di bawah input */
+    margin-left: 15px;
+}
+
+.dateInput {
+    font-family: 'poppins', sans-serif;
+    padding: 10px; /* Padding untuk input tanggal */
+    border: 1px solid #294869; /* Batas pada input */
+    border-radius: 4px; /* Sudut input melengkung */
+    margin-right: 15px; /* Jarak antara input tanggal dan tombol filter */
+    margin-left: 10px;
+    /* box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); */
+}
+
+.printAllButton {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #000;
+}
+
+/* Ikon default (outline) */
+.icon {
+    color: #2b2e31;
+}
+
+/* Ikon saat dihover (fill) */
+.printAllButton:hover .icon {
+    color: #7995b6; /* Mengisi ikon dengan warna biru */
+}
+
+/* Ikon saat disabled (garis melintang) */
+.disabledIcon {
+    color: gray;
+    opacity: 0.5; /* Membuat ikon terlihat lebih pudar */
+    cursor: not-allowed;
+}
+
+/* Garis melintang untuk disabled */
+.disabledIcon:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Garis melintang */
+    transform: rotate(45deg);
+}
+
+/* Styling untuk container informasi transaksi */
+.infoContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Menyusun kolom, label di kiri, nilai di kanan */
+    gap: 15px; /* Jarak antara label dan nilai */
+    margin-bottom: 20px;
+}
+
+/* Setiap baris informasi (ID Transaksi, Tanggal, Pelanggan, Pegawai) */
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; /* Jarak antar baris */
+}
+
+/* Styling untuk label setiap atribut */
+.infoLabel {
+    font-weight: bold;
+    color: #333; /* Warna label lebih gelap */
+    font-size: 18px;
+    align-self: center; /* Mengatur label berada di tengah secara vertikal */
+}
+
+/* Styling untuk nilai atribut */
+.infoValue {
+    font-size: 18px;
+    color: #555; /* Warna teks nilai lebih soft */
+    padding: 8px;
+    background-color: rgb(167, 199, 231, 0.2);
+    border-radius: 6px; /* Sudut melengkung untuk nilai */
+    text-align: left; /* Atur teks kiri untuk konsistensi */
+}
+
+/* Untuk Tanggal Transaksi dan Pegawai, geser sedikit ke kanan */
+.dateLabel, .employeeLabel {
+    margin-left: 10px; /* Memberi sedikit jarak agar lebih rapat dengan nilai */
+}
+
+/* Container untuk total harga transaksi */
+.totalContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Pemisah untuk memisahkan informasi dan tabel */
+.separator {
+    margin: 20px 0;
+    border: 1px solid #e0e0e0;
+}
+
+.reportTable {
+    width: 100%; /* Tabel mengambil lebar penuh */
+    border-collapse: collapse; /* Menghilangkan jarak antar batas sel */
+    margin-top: 20px; /* Jarak antara judul dan tabel */
+}
+ 
+.reportTable th,
+.reportTable td {
+    font-family: 'Poppins', sans-serif;
+    padding: 12px; /* Jarak di dalam sel tabel */
+    text-align: left; /* Menyelaraskan teks di sebelah kiri */
+}
+ 
+.reportTable th {
+    background-color: rgba(231, 167, 177, 0.4); /* Warna latar belakang header tabel */
+    font-weight: bold; /* Menebalkan teks header */
+}
+
+.reportTable th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.referralTable th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.reportTable tbody tr:hover {
+    background-color: rgba(231, 167, 177, 0.08);
+}
+
+.noData {
+    text-align: center; /* Memusatkan teks jika tidak ada data */
+    padding: 20px;
+    color: #999; /* Warna untuk teks tidak ada data */
+}
+
+.buttonContainer {
+    display: flex;               /* Menggunakan flexbox */
+    justify-content: center;     /* Memusatkan tombol secara horizontal */
+    align-items:center;         /* Memusatkan tombol secara vertikal (jika dibutuhkan) */
+    width: 100%;                 /* Pastikan kontainer memenuhi lebar penuh */
+    height: 100%;                /* Opsional: sesuaikan jika ingin memusatkan vertikal dalam kontainer */
+}
+
+.actionButton {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    background:rgba(231, 167, 177, 0.5); /* Warna background di normal state */
+    color: #ffffff; /* Warna teks sesuai dengan background */
+    border-radius: 20px; /* Sudut melengkung untuk tombol */
+    border: 1px solid rgba(231, 167, 177, 0);
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-left: 10px; /* Jarak antara input container dan tombol "Tambah" */
+    margin-top: 0; /* Pastikan tidak ada margin atas yang tidak diinginkan */
+    height: auto;
+}
+
+.actionButton:hover {
+    background: transparent; /* Latar belakang hilang saat hover */
+    color:rgba(231, 167, 177);
+    border: 1px solid rgba(231, 167, 177);
+}
+
+.printButton {
+    margin-top: 30px;  /* Menambahkan jarak atas agar tombol turun sedikit */
+    background:rgba(231, 167, 177, 0.5);
+    color: #fff; /* Warna teks */
+    border: 1px solid rgba(231, 167, 177, 0);    
+    padding: 10px 20px; /* Padding untuk ukuran tombol */
+    border-radius: 5px; /* Ujung tombol melengkung */
+    cursor: pointer; /* Ganti kursor menjadi pointer saat hover */
+    font-weight: 700;
+    margin-right: 0px;
+}
+
+.printButton:hover {
+    background: transparent; /* Latar belakang hilang saat hover */
+    color:rgba(231, 167, 177);
+    border: 1px solid rgba(231, 167, 177);
+}
+
+.modalReportTable {
+    width: 100%; /* Tabel mengambil lebar penuh */
+    border-collapse: collapse; /* Menghilangkan jarak antar batas sel */
+    margin-top: 20px; /* Jarak antara judul dan tabel */
+}
+ 
+.modalReportTable th,
+.modalReportTable td {
+    font-family: 'Poppins', sans-serif;
+    padding: 12px; /* Jarak di dalam sel tabel */
+    text-align: left; /* Menyelaraskan teks di sebelah kiri */
+}
+ 
+.modalReportTable th {
+    background-color: rgba(231, 167, 177, 0.4); /* Warna latar belakang header tabel */
+    font-weight: bold; /* Menebalkan teks header */
+}
+
+.modalReportTable th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.modalReportTable th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.modalReportTable tbody tr:hover {
+    background-color: rgba(231, 167, 177, 0.08);
+}
+
+/* Gaya untuk pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Jarak di atas */
+}
+
+/* Gaya untuk tombol pagination */
+.pagination button {
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: 1px solid rgba(231, 167, 177); /* Warna border untuk semua tombol */
+    border-radius: 5px;
+    background-color: transparent; /* Tidak ada latar belakang */
+    color: rgba(231, 167, 177); /* Warna teks biru */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transisi warna saat hover */
+}
+
+/* Gaya untuk tombol yang di-hover */
+.pagination button:hover {
+    background-color: rgba(231, 167, 177);
+    color: white;
+    font-weight: 600;
+}
+
+/* Gaya untuk tombol yang aktif */
+.pagination button.activePage {
+    background-color: rgba(231, 167, 177);
+    color: white;
+    font-weight: 600;
+}
+
+/* Gaya untuk tombol yang tidak aktif (disabled) */
+.pagination button:disabled {
+    border: 1px solid #e0e0e0; /* Border lebih terang untuk tombol yang tidak aktif */
+    color: #e0e0e0; /* Warna teks lebih terang */
+    cursor: not-allowed; /* Mengubah cursor saat hover */
+}

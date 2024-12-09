@@ -1,0 +1,285 @@
+.main {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    margin-left: 200px;
+    height: auto;
+}
+
+.pageTitle {
+    font-family: 'poppins', sans-serif;
+    font-size: 26px; /* Ukuran font untuk judul halaman */
+    margin-bottom: 20px; /* Jarak di bawah judul */
+}
+
+.separator {
+    margin: 20px 0; /* Jarak di bawah judul */
+    border: 1px solid #e0e0e0; /* Garis pemisah */
+}
+
+/* Search Container */
+.searchContainer {
+    display: flex; /* Menyelaraskan elemen dalam baris */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    margin-bottom: 20px; /* Jarak di bawah grup input */
+    background-color: transparent;
+}
+
+/* Input Container untuk menyelaraskan ikon dan input */
+.inputContainer {
+    display: flex; /* Menggunakan flex untuk input dan ikon */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    border: 1px solid rgba(201, 212, 225, 0.4); /* Batas untuk memberi efek berbingkai */
+    background-color: rgba(231, 167, 177, 0.05);
+    border-radius: 10px; /* Sudut melengkung untuk mempercantik */
+    padding: 15px; /* Menambah ruang di dalam */
+    flex: 1; /* Memungkinkan container untuk mengambil ruang yang ada */
+    height:28px;
+}
+
+/* Gaya untuk ikon pencarian */
+.searchIcon {
+    color: #B0B5BA; /* Warna ikon */
+    margin-right: 10px; /* Jarak antara ikon dan input */
+}
+
+/* Input Pencarian */
+.searchInput {
+    font-family: 'Poppins', sans-serif; 
+    padding: 10px; 
+    border: none; /* Hilangkan batas untuk kesan bersih */
+    outline: none; /* Hilangkan outline saat difokuskan */
+    background-color: transparent; /* Latar belakang transparan */
+    flex: 1; /* Memungkinkan input mengambil sisa ruang yang ada */
+    height: 1000px;
+}
+
+.addButton {
+    padding: 9px 10px; /* Jarak dalam */
+    background-color: #007bff; /* Warna tombol */
+    color: white; /* Warna teks */
+    border: none; /* Hapus border default */
+    border-radius: 8px; /* Sudut membulat */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 15px; /* Jarak ke elemen sebelumnya */
+}
+
+.addButton:hover {
+    background-color: #0056b3; /* Warna tombol saat hover */
+}
+
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 kolom per baris */
+    gap: 20px; /* Jarak antar card */
+    margin-top: 20px;
+}
+
+.card {
+    max-height: 300px;
+    height: 100%;
+    max-width: 200px;
+    width:100%;
+    background-color: #fff;
+    border-radius: 12px; /* Sudut membulat */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 15px;
+    position: relative; /* Untuk mengatur dropdown titik tiga */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efek hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Bayangan lebih besar saat hover */
+}
+
+.cardImage {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px; /* Sudut membulat pada gambar */
+    overflow: hidden;
+    margin-bottom: 10px; /* Jarak di bawah gambar */
+    position: relative; /* Agar titik tiga berada di atas gambar */
+}
+
+.noImage {
+    font-family: 'poppins', sans-serif;
+}
+
+.cardImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Gambar proporsional */
+}
+
+.cardDetails {
+    padding: 10px 15px; /* Jarak dalam untuk elemen teks */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Jarak antar elemen */
+}
+
+.menuName {
+    font-family: 'poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin: 0; /* Hapus margin default */
+    text-align: left;
+}
+
+.cardBottom {
+    display: flex;
+    justify-content: space-between; /* Elemen kiri dan kanan */
+    align-items: center;
+    margin-top: auto; /* Jarak otomatis untuk mengisi ruang */
+}
+
+
+.menuPrice {
+    font-family: 'poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-align: right; /* Rata kanan */
+}
+
+.menuCategory {
+    font-family: 'poppins', sans-serif;
+    font-size: 14px;
+    color: #ff5722; /* Warna kategori */
+    background-color: #ffe5d8; /* Latar belakang kategori */
+    border-radius: 8px;
+    padding: 3px 8px; /* Jarak dalam */
+    text-align: center; /* Rata tengah */
+}
+
+.categoryContainer {
+    display: flex;
+    gap: 10px; /* Jarak antar tombol */
+    margin-bottom: 20px; /* Jarak ke elemen berikutnya */
+    flex-wrap: wrap; /* Agar tombol terbungkus jika lebar melebihi container */
+}
+
+.categoryButton {
+    padding: 8px 20px;
+    border: 2px solid transparent; /* Default border transparan */
+    border-radius: 25px; /* Bentuk oval */
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    color: var(--default-color); /* Warna teks default berdasarkan kategori */
+    background-color: var(--default-bg-color); /* Latar tipis default berdasarkan kategori */
+    border-color: var(--default-color); /* Border mengikuti warna teks */
+}
+
+/* Hover efek untuk tombol */
+.categoryButton:hover {
+    background-color: var(--hover-bg-color); /* Warna hover */
+}
+
+/* Tombol aktif: warna penuh */
+.categoryButtonActive {
+    font-weight: bold;
+    color: white; /* Teks putih saat aktif */
+    background-color: var(--active-color); /* Latar belakang penuh sesuai kategori */
+    border-color: var(--active-color); /* Border warna kategori */
+}
+
+/* Variabel warna untuk kategori */
+.categoryAll {
+    --default-color: #aaa;
+    --default-bg-color: #f5f5f5;
+    --hover-bg-color: #e0e0e0;
+    --active-color: #aaa;
+}
+
+.categoryCoffee {
+    --default-color: #ff5722;
+    --default-bg-color: #ffe5d8;
+    --hover-bg-color: #ffd4c2;
+    --active-color: #ff5722;
+}
+
+.categoryTea {
+    --default-color: #4caf50;
+    --default-bg-color: #e8f5e9;
+    --hover-bg-color: #dcedc8;
+    --active-color: #4caf50;
+}
+
+.categoryFood {
+    --default-color: #2196f3;
+    --default-bg-color: #e3f2fd;
+    --hover-bg-color: #bbdefb;
+    --active-color: #2196f3;
+}
+
+.categoryMilkbased {
+    --default-color: #9c27b0;
+    --default-bg-color: #f3e5f5;
+    --hover-bg-color: #e1bee7;
+    --active-color: #9c27b0;
+}
+
+.categorySignatureDrink {
+    --default-color: #ff9800;
+    --default-bg-color: #fff3e0;
+    --hover-bg-color: #ffe0b2;
+    --active-color: #ff9800;
+}
+
+.cardActionsDropdown {
+    position: absolute; /* Titik tiga di pojok kanan atas */
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8); /* Tambahkan latar belakang agar terlihat jelas */
+    border-radius: 50%; /* Bentuk bulat */
+    padding: 5px; /* Jarak sekitar ikon */
+    cursor: pointer;
+}
+
+.dropdownButton {
+    font-size: 20px; /* Ukuran ikon */
+    color: #777;
+}
+
+.dropdownButton:hover {
+    color: #007bff; /* Warna biru saat hover */
+}
+
+.dropdownMenu {
+    display: none; /* Default tidak terlihat */
+    position: absolute;
+    top: 40px; /* Jarak dropdown dari tombol */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.dropdownMenu.show {
+    display: block; /* Tampilkan dropdown saat kelas "show" ditambahkan */
+}
+
+.dropdownItem {
+    padding: 10px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+    background-color: #f5f5f5; /* Latar saat hover */
+}
+

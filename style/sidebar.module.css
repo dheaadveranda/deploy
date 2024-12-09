@@ -1,0 +1,109 @@
+/* Sidebar Container */
+.sidebar {
+    width: 200px; /* Lebar sidebar tetap */
+    background: linear-gradient(to bottom right, #A7C7E7, #557390); /* Gradiasi dengan 3 warna */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column; /* Susun elemen dalam kolom */
+    height: 100vh; /* Tinggi penuh layar */
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px 15px; /* Padding atas/bawah dan kiri/kanan */
+    box-sizing: border-box; /* Pastikan padding dan border tidak menambah ukuran */
+    overflow: hidden; /* Menghilangkan scrollbar */
+}
+
+/* Logo */
+.logo {
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    color: #2C3E50; /* Biru tua untuk logo */
+    margin-bottom: 20px;
+    text-align: center;
+    flex-shrink: 0; /* Mencegah logo mengecil */
+}
+
+/* Sidebar Item List */
+.sidebarList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Elemen ini akan mengisi ruang kosong */
+    display: flex;
+    flex-direction: column; /* Menyusun item dalam kolom */
+    justify-content: flex-start; /* Menyebarkan item ke atas */
+    gap: 5px; /* Spasi antar item */
+}
+
+/* SidebarLink: Menghilangkan underline dan memastikan warna teks */
+.sidebarLink {
+    color: #ffffff; /* Warna teks biru gelap untuk kontras */
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; /* Mengurangi padding agar tidak terlalu besar */
+    border-radius: 6px;
+    width: 100%; /* Agar link mengisi seluruh lebar item */
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Untuk transisi smooth saat hover/active */
+}
+
+/* Hover effect dan active state */
+.sidebarLink:hover,
+.sidebarLink.active {
+    background: linear-gradient(to right, rgba(231, 167, 177, 0.7), rgba(232, 215, 233, 0.7));
+    color: #2C3E50; /* Warna teks berubah menjadi putih saat hover atau aktif */
+    font-weight: bold; 
+    padding: 10px 15px; /* Pastikan padding tetap sama */
+    border-radius: 6px; /* Jaga border-radius tetap sama */
+}
+
+/* Mengatur posisi ikon dan teks */
+.sidebarLink svg {
+    margin-right: 10px; /* Spasi antara ikon dan teks */
+}
+
+/* Tombol Log Out */
+.logoutButton {
+    color: #ffffff; /* Warna teks putih untuk kontras */
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px; /* Ukuran font yang konsisten dengan item lainnya */
+    border: none; /* Menghilangkan border */
+    background: none; /* Menghilangkan background default */
+    border-radius: 6px;
+    padding: 10px 15px; /* Padding agar konsisten dengan item sidebar */
+    cursor: pointer;
+    margin-top: auto; /* Menempatkan tombol logout di bawah */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transition smooth untuk hover */
+    width: 100%; /* Tombol mengisi lebar sidebar */
+    display: flex;
+    align-items: center; /* Menyusun ikon dan teks dalam satu baris */
+    justify-content: center; /* Memastikan teks dan ikon sejajar di tengah */
+    text-align: center; /* Memastikan teks tetap berada di tengah */
+    display: inline-block;
+}
+
+/* Tombol saat hover */
+.logoutButton:hover {
+    background: linear-gradient(to right, rgba(231, 167, 177, 0.7), rgba(232, 215, 233, 0.7));
+    color: #2C3E50; /* Warna teks berubah menjadi putih saat hover atau aktif */
+    font-weight: bold; 
+    padding: 10px 15px; /* Pastikan padding tetap sama */
+    border-radius: 6px;
+}
+
+/* Ikon pada tombol logout */
+.logoutButton svg {
+    margin-right: 10px; /* Spasi antara ikon dan teks */
+}
+
+/* Menambahkan responsivitas untuk tampilan mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* Menyesuaikan lebar sidebar di perangkat kecil */
+        height: auto; /* Menyesuaikan tinggi pada layar kecil */
+    }
+}

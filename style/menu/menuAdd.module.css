@@ -1,0 +1,116 @@
+/* Container Utama */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Konten Utama */
+.main {
+    flex: 1;
+    padding: 40px;
+    background-color: #f5f6fa;
+    margin-left: 240px; /* Pastikan ukuran ini sesuai dengan sidebar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Judul Halaman */
+.pageTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1c3853;
+    margin-bottom: 20px;
+}
+
+/* Form */
+.form {
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Grup Input */
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.inputGroup label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Input dan Select */
+.input,
+.select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input:focus,
+.select:focus {
+    border-color: #375BB2;
+}
+
+/* File Input */
+.fileInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Grup Tombol */
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+/* Tombol Simpan */
+.saveButton {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.saveButton:hover {
+    background-color: #218838;
+}
+
+/* Tombol Batal */
+.cancelButton {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancelButton:hover {
+    background-color: #c82333;
+}

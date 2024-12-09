@@ -1,0 +1,198 @@
+.main {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    margin-left: 200px;
+    height: auto;
+}
+
+.pageTitle {
+    font-family: 'poppins', sans-serif;
+    font-size: 26px; /* Ukuran font untuk judul halaman */
+    margin-bottom: 20px; /* Jarak di bawah judul */
+}
+
+/* Garis Pemisah */
+.separator {
+    margin: 20px 0; /* Jarak di bawah judul */
+    border: 1px solid #e0e0e0; /* Garis pemisah */
+}
+
+
+/* Search Container */
+.searchContainer {
+    display: flex; /* Menyelaraskan elemen dalam baris */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    margin-bottom: 20px; /* Jarak di bawah grup input */
+    background-color: transparent;
+}
+
+/* Input Container untuk menyelaraskan ikon dan input */
+.inputContainer {
+    display: flex; /* Menggunakan flex untuk input dan ikon */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    border: 1px solid rgba(201, 212, 225, 0.4); /* Batas untuk memberi efek berbingkai */
+    background-color: rgba(231, 167, 177, 0.05);
+    border-radius: 10px; /* Sudut melengkung untuk mempercantik */
+    padding: 15px; /* Menambah ruang di dalam */
+    flex: 1; /* Memungkinkan container untuk mengambil ruang yang ada */
+    height:28px;
+}
+
+/* Gaya untuk ikon pencarian */
+.searchIcon {
+    color: #B0B5BA; /* Warna ikon */
+    margin-right: 10px; /* Jarak antara ikon dan input */
+}
+
+/* Input Pencarian */
+.searchInput {
+    font-family: 'Poppins', sans-serif; 
+    padding: 10px; 
+    border: none; /* Hilangkan batas untuk kesan bersih */
+    outline: none; /* Hilangkan outline saat difokuskan */
+    background-color: transparent; /* Latar belakang transparan */
+    flex: 1; /* Memungkinkan input mengambil sisa ruang yang ada */
+    height: 1000px;
+}
+
+.addButton {
+    font-family: 'Poppins', sans-serif; 
+    font-weight: bold;
+    background:rgba(231, 167, 177, 0.5); 
+    color: white; 
+    border: 1px solid rgba(231, 167, 177, 0);
+    border-radius: 20px; /* Sudut melengkung untuk tombol */
+    padding: 10px 15px; 
+    cursor: pointer; 
+    margin-left: 10px; /* Jarak antara input container dan tombol "Tambah" */
+    margin-top: 0; /* Pastikan tidak ada margin atas yang tidak diinginkan */
+    height: auto;
+}
+
+.addButton:hover {
+    background: transparent; /* Latar belakang hilang saat hover */
+    color:rgba(231, 167, 177);
+    border: 1px solid rgba(231, 167, 177);
+}
+
+.stokTable {
+    width: 100%; /* Tabel mengambil lebar penuh */
+    border-collapse: collapse; /* Menghilangkan jarak antar batas sel */
+    margin-top: 20px; /* Jarak antara judul dan tabel */
+}
+
+.stokTable th,
+.stokTable td {
+    font-family: 'poppins', sans-serif;
+    padding: 12px; /* Jarak di dalam sel tabel */
+    text-align: left; /* Menyelaraskan teks di sebelah kiri */
+}
+
+.stokTable th {
+    background-color: rgba(231, 167, 177, 0.4); /* Warna latar belakang header tabel */
+    font-weight: bold; /* Menebalkan teks header */
+}
+
+.stokTable th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.stokTable th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.stokTable tbody tr:hover {
+    background-color: rgba(231, 167, 177, 0.08);
+}
+
+.actionButton {
+    background-color: #3498db; /* Tombol biru untuk edit */
+    color: white; /* Warna teks tombol */
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer; /* Menunjukkan bahwa ini adalah elemen yang dapat diklik */
+    margin-right: 5px; /* Jarak antara tombol */
+}
+
+.actionButton:last-child {
+    background-color: #e74c3c; /* Tombol merah untuk hapus */
+}
+
+/* Gaya untuk ikon di kolom aksi */
+.actionIcon {
+    margin-right: 10px; /* Jarak antar ikon */
+    cursor: pointer; /* Mengubah pointer saat hover pada ikon */
+    transition: color 0.3s; /* Efek transisi saat hover */
+    color: #CBD5E0; /* Set warna default untuk ikon action */
+}
+
+/* Efek hover untuk ikon Detail */
+.detailIcon:hover {
+    color: #4A90E2; /* Mengubah warna saat dihover dengan warna biru */
+}
+
+/* Efek hover untuk ikon Edit */
+.editIcon:hover {
+    color: #6EBB8B; /* Mengubah warna saat dihover dengan warna hijau */
+}
+
+/* Efek hover untuk ikon Hapus */
+.deleteIcon:hover {
+    color: #D94E4E; /* Mengubah warna saat dihover dengan warna merah */
+}
+
+.noData {
+    text-align: center; /* Memusatkan teks */
+    padding: 20px; /* Memberikan ruang di sekitar */
+    color: #999; /* Warna untuk teks tidak ada data */
+    font-weight: bold; /* Menebalkan teks */
+}
+
+/* Mengatur background dan gaya lebih dari not found */
+.noData {
+    background-color: #f9f9f9; /* Contohnya untuk warna latar belakang */
+    border-radius: 8px; /* Sudut melengkung */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bayangan */
+}
+
+/* Gaya untuk pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Jarak di atas */
+}
+
+/* Gaya untuk tombol pagination */
+.pagination button {
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: 1px solid rgba(231, 167, 177); /* Warna border untuk semua tombol */
+    border-radius: 5px;
+    background-color: transparent; /* Tidak ada latar belakang */
+    color: rgba(231, 167, 177); /* Warna teks biru */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transisi warna saat hover */
+}
+
+/* Gaya untuk tombol yang di-hover */
+.pagination button:hover {
+    background-color: rgba(231, 167, 177);
+    color: white;
+    font-weight: 600;
+}
+
+/* Gaya untuk tombol yang aktif */
+.pagination button.activePage {
+    background-color: rgba(231, 167, 177);
+    color: white;
+    font-weight: 600;
+}
+
+/* Gaya untuk tombol yang tidak aktif (disabled) */
+.pagination button:disabled {
+    border: 1px solid #e0e0e0; /* Border lebih terang untuk tombol yang tidak aktif */
+    color: #e0e0e0; /* Warna teks lebih terang */
+    cursor: not-allowed; /* Mengubah cursor saat hover */
+}

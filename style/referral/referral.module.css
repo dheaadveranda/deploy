@@ -1,0 +1,133 @@
+/* referral.module.css */
+.main {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    margin-left: 200px;
+    height: auto;
+}
+ 
+/* Judul Halaman */
+.pageTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px; /* Ukuran font untuk judul halaman */
+    margin-bottom: 20px; /* Jarak di bawah judul */
+}
+ 
+/* Garis Pemisah */
+.separator {
+    margin: 20px 0; /* Jarak di bawah judul */
+    border: 1px solid #e0e0e0; /* Garis pemisah */
+}
+ 
+/* Search Container */
+.searchContainer {
+    display: flex; /* Menyelaraskan elemen dalam baris */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    margin-bottom: 20px; /* Jarak di bawah grup input */
+    background-color: transparent;
+}
+ 
+/* Input Container untuk menyelaraskan ikon dan input */
+.inputContainer {
+    display: flex; /* Menggunakan flex untuk input dan ikon */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    border: 1px solid rgba(201, 212, 225, 0.4); /* Batas untuk memberi efek berbingkai */
+    background-color: rgba(231, 167, 177, 0.05);
+    border-radius: 10px; /* Sudut melengkung untuk mempercantik */
+    padding: 15px; /* Menambah ruang di dalam */
+    flex: 1; /* Memungkinkan container untuk mengambil ruang yang ada */
+    height:28px;
+}
+ 
+/* Gaya untuk ikon pencarian */
+.searchIcon {
+    color: #B0B5BA; /* Warna ikon */
+    margin-right: 10px; /* Jarak antara ikon dan input */
+}
+ 
+/* Input Pencarian */
+.searchInput {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    border: none; /* Hilangkan batas untuk kesan bersih */
+    outline: none; /* Hilangkan outline saat difokuskan */
+    background-color: transparent; /* Latar belakang transparan */
+    flex: 1; /* Memungkinkan input mengambil sisa ruang yang ada */
+    height: 1000px;
+}
+ 
+.addButton {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    background:rgba(231, 167, 177, 0.5); /* Warna background di normal state */
+    color: #ffffff; /* Warna teks sesuai dengan background */
+    border-radius: 20px; /* Sudut melengkung untuk tombol */
+    border: 1px solid rgba(231, 167, 177, 0);
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-left: 10px; /* Jarak antara input container dan tombol "Tambah" */
+    margin-top: 0; /* Pastikan tidak ada margin atas yang tidak diinginkan */
+    height: auto;
+}
+
+/* Hover State */
+.addButton:hover {
+    background: transparent; /* Latar belakang hilang saat hover */
+    color:rgba(231, 167, 177);
+    border: 1px solid rgba(231, 167, 177); /* Border muncul dengan warna sesuai dengan teks */
+}
+ 
+/* Tabel Referal */
+.referralTable {
+    width: 100%; /* Tabel mengambil lebar penuh */
+    border-collapse: collapse; /* Menghilangkan jarak antar batas sel */
+    margin-top: 20px; /* Jarak antara judul dan tabel */
+}
+ 
+.referralTable th,
+.referralTable td {
+    font-family: 'Poppins', sans-serif;
+    padding: 12px; /* Jarak di dalam sel tabel */
+    text-align: left; /* Menyelaraskan teks di sebelah kiri */
+}
+ 
+.referralTable th {
+    background-color: rgba(231, 167, 177, 0.4); /* Warna latar belakang header tabel */
+    font-weight: bold; /* Menebalkan teks header */
+}
+
+.referralTable th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.referralTable th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.referralTable tbody tr:hover {
+    background-color: rgba(231, 167, 177, 0.08);
+}
+ 
+/* Gaya untuk ikon di kolom aksi */
+.actionIcon {
+    margin-right: 10px; /* Jarak antar ikon */
+    cursor: pointer; /* Mengubah pointer saat hover pada ikon */
+    transition: color 0.3s; /* Efek transisi saat hover */
+}
+ 
+/* Efek hover untuk ikon Detail */
+.detailIcon:hover {
+    color: #4A90E2; /* Mengubah warna saat dihover dengan warna biru */
+}
+ 
+/* Efek hover untuk ikon Edit */
+.editIcon:hover {
+    color: #6EBB8B; /* Mengubah warna saat dihover dengan warna hijau */
+}
+ 
+/* Efek hover untuk ikon Hapus */
+.deleteIcon:hover {
+    color: #D94E4E; /* Mengubah warna saat dihover dengan warna merah */
+}
+ 

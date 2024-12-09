@@ -1,0 +1,115 @@
+/* Konten Utama */
+.main {
+    flex: 1;
+    padding: 10px; /* Padding lebih kecil */
+    background-color: #ffffff;
+    margin-left: 200px; /* Menyesuaikan lebar sidebar */
+    display: flex;
+    justify-content: center; /* Memastikan konten terpusat secara horizontal */
+    align-items: center; /* Memastikan konten terpusat secara vertikal */
+    overflow: hidden; /* Menjaga konten tetap dalam ruang */
+    height: 100vh; /* Memastikan konten mengisi seluruh tinggi layar */
+    box-sizing: border-box; /* Menjamin tidak ada ruang ekstra di sekeliling */
+}
+
+/* Card Utama */
+.card {
+    background-color: rgba(45, 72, 127, 0.3);
+    padding: 15px; /* Kurangi padding lebih banyak */
+    border-radius: 12px; /* Kurangi border-radius agar lebih padat */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Kurangi efek shadow */
+    max-width: 700px; /* Lebar card lebih kecil */
+    width: 100%;
+    height: auto; /* Mengatur tinggi secara otomatis */
+    text-align: center;
+    margin-top: 15px; /* Jarak lebih kecil antara card dan atas */
+}
+
+/* Gambar Menu */
+.menuImage {
+    max-width: 200px; /* Lebar gambar lebih kecil */
+    width: 100%;
+    height: 200px; /* Tetap tentukan tinggi gambar yang konsisten */
+    object-fit: cover; /* Memastikan gambar mengisi ruang secara proporsional */
+    border-radius: 10px; /* Gambar lebih kecil dengan border-radius yang lebih kecil */
+    margin-bottom: 20px; /* Jarak gambar lebih kecil */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Efek shadow lebih kecil */
+}
+
+/* Detail Informasi */
+.details {
+    margin-top: 15px; /* Mengurangi jarak antara bagian-bagian detail */
+}
+
+/* Detail Title */
+.detailTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px; /* Ukuran font lebih kecil */
+    font-weight: bold;
+    color: #1c3853;
+    margin-bottom: 10px; /* Mengurangi jarak bawah title */
+}
+
+/* Grid untuk Detail */
+.detailGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px; /* Mengurangi jarak antar kolom */
+    text-align: left;
+}
+
+/* Responsivitas Grid Detail */
+@media (max-width: 768px) {
+    .detailGrid {
+        grid-template-columns: 1fr; /* Satu kolom di perangkat mobile */
+    }
+}
+
+/* Detail Item */
+.detailItem {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    padding: 10px; /* Mengurangi padding lebih lanjut */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Mengurangi efek shadow */
+}
+
+/* Label */
+.label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 4px; /* Mengurangi jarak bawah label */
+}
+
+/* Value */
+.value {
+    color: #333;
+    font-size: 14px; /* Ukuran font lebih kecil */
+}
+
+/* Tombol Kembali */
+.backButton {
+    margin-top: 20px;
+    padding: 8px 20px; /* Kurangi padding tombol */
+    font-size: 14px; /* Ukuran font lebih kecil */
+    font-weight: bold;
+    color: #fff;
+    background-color: #375bb2;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.backButton:hover {
+    background-color: #2c4a8a;
+}
+
+/* Loading */
+.loading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px; /* Ukuran font lebih kecil */
+    color: #888;
+}

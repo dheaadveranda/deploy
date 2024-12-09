@@ -1,0 +1,28 @@
+.card {
+    background-color: #ffffff; /* Warna latar belakang kartu */
+    border-radius: 8px;
+    border: 1px solid #e0e0e0; /* Tambahkan border terang */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efek hover */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
+}
+
+.cardTitle {
+    font-family: 'poppins', sans-serif;
+    font-size: 16px;
+    color: #333; /* Warna teks judul */
+}
+
+.cardValue {
+    font-family: 'poppins', sans-serif;
+    font-size: 24px; /* Ukuran font untuk nilai */
+    color: #4CAF50; /* Warna untuk nilai */
+    font-weight: bold;
+    margin: 10px 0;
+}

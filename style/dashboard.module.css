@@ -1,0 +1,97 @@
+.main { 
+    flex: 1; /* Mengambil sisa ruang untuk konten utama */
+    padding: 20px; /* Jarak di sekitar konten utama */
+    background-color: #ffffff; /* Warna latar belakang konten utama */
+    margin-left: 200px; /* Memberi ruang antara sidebar dan konten utama */
+    height: auto;
+}
+
+/* Header - Informasi pengguna */
+.header {
+    display: flex;
+    justify-content: flex-end; /* Mengatur agar konten berada di sebelah kanan */
+    align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.headerContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.header p {
+    margin: 0;
+    font-family: 'poppins', sans-serif;
+    font-weight: bold;
+}
+
+/* Judul utama Dashboard */
+.pageTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Pemisah horizontal */
+.separator {
+    border-top: 1px solid #e0e0e0;
+    margin-bottom: 30px;
+}
+
+/* Judul untuk bagian Sales Summary */
+.salesSummaryTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    color: #375BB2;
+    margin-bottom: 10px;
+}
+
+/* Styling untuk bagian Filter Tahun dan Bulan */
+.filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Styling dropdown (Tahun dan Bulan) */
+.filters label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.filters select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+/* Styling ketika hover pada dropdown */
+.filters select:hover {
+    border-color: #375BB2;
+}
+
+/* Kontainer untuk kartu (Card) */
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4 kolom pada baris pertama */
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Styling footer */
+.footer {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    margin-top: 40px;
+}

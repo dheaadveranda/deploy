@@ -1,0 +1,108 @@
+/* stokAdd.module.css */
+
+.container {
+    display: flex; /* Mengatur container menjadi flex */
+    height: 100vh; /* Tinggi penuh viewport */
+}
+
+.main {
+    flex: 1; /* Mengambil sisa ruang untuk konten utama */
+    padding: 30px; /* Jarak di sekitar konten utama */
+    margin-left: 300px; /* Memberi ruang antara sidebar dan konten utama */
+    background-color: #F5F6FA; /* Warna latar belakang untuk konten */
+    border-radius: 8px; /* Sudut melengkung untuk konten */
+}
+
+.pageTitle {
+    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+    font-size: 39px; /* Ukuran font untuk judul halaman */
+    margin-bottom: 20px; /* Jarak di bawah judul */
+}
+
+/* Garis Pemisah */
+.separator {
+    margin: 20px 0; /* Jarak di bawah judul */
+    border: 2px solid #e0e0e0; /* Garis pemisah */
+}
+
+/* Judul Ringkasan Penjualan */
+.addStokTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    margin-bottom: 20px; /* Jarak di bawah subjudul */
+    color: #375BB2; /* Warna untuk subjudul */
+}
+
+/* Kontainer input */
+.inputContainer {
+    display: flex; /* Menggunakan flex untuk menyusun label dan input */
+    justify-content: space-between; /* Memisahkan label dan input ke kiri dan kanan */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    margin-bottom: 15px; /* Jarak di bawah setiap input */
+    width: 100%;
+}
+
+/* Label untuk input */
+.inputContainer label {
+    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+    font-weight: bold; /* Menebalkan teks label */
+    color: #333; /* Warna untuk label */
+    width: 30%; /* Mengatur lebar label */
+}
+
+/* Input untuk stok */
+.inputContainer input {
+    font-family: 'popins', sans-serif;
+    width: 100%; /* Memastikan input mengambil lebar penuh yang tersisa */
+    max-width: 65%;
+    padding: 10px; /* Padding di dalam input */
+    border: 1px solid #ccc; /* Batas pada input */
+    border-radius: 4px; /* Sudut input melengkung */
+    outline: none; /* Menghilangkan outline */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Bayangan untuk input */
+    box-sizing: border-box;
+}
+
+.buttonContainer {
+    display: flex; /* Menyusun tombol dalam baris */
+    justify-content: flex-end; /* Memisahkan tombol ke kanan */
+    margin-top: 20px; /* Beri jarak atas untuk memisahkan dari input */
+}
+
+.saveButton {
+    font-family: 'poppins', sans-serif;
+    font-weight: 550;
+    background-color: #4CAF50; 
+    color: white; 
+    border: none; 
+    border-radius: 10px; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    margin-right: 10px; /* Jarak antara tombol Simpan dan Batal */
+}
+
+.cancelButton {
+    font-family: 'poppins', sans-serif;
+    font-weight: 550;
+    background-color: transparent; /* Membuat latar belakang transparan */
+    color: #D94E4E; /* Warna teks pada tombol */
+    border: 2px solid #D94E4E; /* Mengatur border dengan ketebalan 2px dan warna #D94E4E */
+    border-radius: 10px; /* Sudut melengkung untuk tombol */
+    padding: 10px 15px; /* Padding di dalam tombol */
+    cursor: pointer; /* Menunjukkan tombol dapat diklik */
+}
+
+/* Posisi dan gaya ikon mata */
+.eyeIcon {
+    position: absolute;
+    right: 10px; /* Pastikan berada di dalam input */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    transition: color 0.2s;
+}
+
+.eyeIcon:hover {
+    color: #333; /* Warna ikon saat di-hover */
+}

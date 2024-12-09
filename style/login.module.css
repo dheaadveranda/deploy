@@ -1,0 +1,95 @@
+/* Kontainer Utama */
+/* Kontainer Utama */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: url('/images/login-bg.jpg') no-repeat center center fixed; /* Tambahkan gambar latar belakang */
+    background-size: cover; /* Sesuaikan ukuran gambar */
+}
+
+/* Wrapper Form */
+.formWrapper {
+    font-family: 'Poppins', sans-serif;
+    background: rgba(255, 255, 255, 0.8); /* Transparan */
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.8s ease-in-out; /* Tambahkan animasi */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.formWrapper h1 {
+    font-size: 36px;
+    color: #333333; /* Teks gelap */
+    margin-bottom: 30px;
+
+}
+
+.formWrapper input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    margin: 8px 0;
+    border: 1px solid #1D2C3A; /* Biru Gelap */
+    border-radius: 25px;
+    font-size: 16px;
+    background: linear-gradient(to right,rgba(186, 167, 231, 0.2), rgba(231, 167, 177, 0.2));
+    color: #1d2c3a; /* Teks gelap */
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Fokus pada input */
+.formWrapper input:focus {
+    border-color: #1D2C3A; /* Biru Gelap */
+    background-color: aliceblue;
+    outline: none;
+    box-shadow: 0 0 5px rgba(29, 44, 58, 0.2); /* Efek glow biru */
+}
+
+.formWrapper input:hover {
+    border-color: #1D2C3A;
+    box-shadow: 0 0 10px rgba(29, 44, 58, 0.3);
+}
+
+.submitBtn {
+    width: 300px;
+    height: 50px;
+    color: #ffffff;
+    background: linear-gradient(to right, #baa7e7, #e7a7b1);
+    box-shadow: 0 6px 20px rgba(29, 44, 58, 0.2);
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(29, 44, 58, 0.1);
+    margin-top: 30px;
+}
+
+.submitBtn:hover {
+    color: #ffffff;
+    background: linear-gradient(to right, #e7a7b1,#baa7e7);
+    box-shadow: 0 6px 20px rgba(29, 44, 58, 0.2);
+    transform: translateY(-2px); /* Efek tombol melayang saat hover */
+}
+
