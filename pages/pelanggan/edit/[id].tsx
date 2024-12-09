@@ -1,8 +1,8 @@
 // pages/pelanggan/edit/[id].tsx
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Sidebar from '../../../components/Sidebar'; 
-import styles from '../../../style/pelanggan/pelangganAdd.module.css'; 
+import Sidebar from '../../../components/Sidebar';
+import styles from '../../../style/pelanggan/pelangganAdd.module.css';
 
 interface Customer {
     IDPelanggan: string;
@@ -38,7 +38,7 @@ const EditPelanggan: React.FC = () => {
         };
 
         if (id) {
-            fetchPelangganDetail(); 
+            fetchPelangganDetail();
             fetchUserRole(); // Ambil role pengguna saat ID tersedia
         }
     }, [id]);
@@ -54,7 +54,7 @@ const EditPelanggan: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-    
+
         const response = await fetch(`/api/pelanggan/updateCustomer`, {
             method: 'PUT',
             headers: {
@@ -62,7 +62,7 @@ const EditPelanggan: React.FC = () => {
             },
             body: JSON.stringify(customer), // Menyimpan data pelanggan yang diubah
         });
-    
+
         if (response.ok) {
             alert('Pelanggan berhasil diubah');
             router.push('/pelanggan'); // Kembali ke halaman pelanggan setelah berhasil
@@ -77,7 +77,7 @@ const EditPelanggan: React.FC = () => {
 
     return (
         <div className={styles.container}>
-            <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }}/>
+            <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }} />
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Pelanggan</h1>
                 <hr className={styles.separator} />
@@ -136,7 +136,7 @@ const EditPelanggan: React.FC = () => {
                         <input
                             type="date"
                             name="TglDaftar"
-                            value={customer.TglDaftar.split('T')[0]} // Format YYYY-MM-DD
+                            value={customer.TglDaftar} // Format YYYY-MM-DD
                             onChange={handleChange}
                             required
                         />
