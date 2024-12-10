@@ -110,7 +110,7 @@ const Dashboard: React.FC = () => {
             <div className={styles.main}>
                 <div className={styles.header}>
                     <div className={styles.headerContent}>
-                        <p>Welcome, {username}</p> {/* Menampilkan nama pengguna */}
+                        <p>Welcome, {username}😜💐✨</p> {/* Menampilkan nama pengguna */}
                     </div>
                 </div>
                 <h1 className={styles.pageTitle}>Dashboard</h1>

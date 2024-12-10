@@ -1,4 +1,3 @@
-// pages/menu.tsx
 import styles from '../style/menu/menu.module.css';
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
@@ -23,16 +22,27 @@ const Menu: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true); // Status loading
     const router = useRouter();
 
+    // Fetch data menu saat halaman dimuat
     useEffect(() => {
         const fetchMenus = async () => {
-            const response = await fetch('/api/menu/getMenu');
-            if (!response.ok) {
-                console.log('Failed to fetch menus');
-                return;
+            try {
+                setIsLoading(true); // Set loading ke true
+                const response = await fetch('/api/menu/getMenu');
+                if (!response.ok) {
+                    console.error('Failed to fetch menus');
+                    setIsLoading(false);
+                    return;
+                }
+                const data: Menu[] = await response.json();
+                setMenus(data);
+
+                const uniqueCategories = Array.from(new Set(data.map((menu) => menu.KategoriMenu)));
+                setCategories(['All', ...uniqueCategories]);
+            } catch (error) {
+                console.error('Error fetching menus:', error);
+            } finally {
+                setIsLoading(false); // Set loading ke false
             }
-            const data = await response.json();
-            console.log('Fetched Menus:', data);
-            setMenus(data);
         };
         fetchMenus();
     }, [router]);

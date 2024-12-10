@@ -24,6 +24,11 @@ const PegawaiDetail: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
+        const storedRole = sessionStorage.getItem('userRole');
+        if (storedRole !== 'admin') {
+            router.push('/dashboard');
+            return;
+        }
         if (id) {
             const fetchPegawaiDetail = async () => {
                 const response = await fetch(`/api/pegawai/getEmployee?id=${id}`);
@@ -34,10 +39,10 @@ const PegawaiDetail: React.FC = () => {
                     console.error('Failed to fetch pegawai details');
                 }
             };
-
+    
             fetchPegawaiDetail();
         }
-    }, [id]);
+    }, [id, router]);    
 
     if (!employee) return <div>Loading...</div>;
 

@@ -24,6 +24,16 @@ const EditPegawai: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
+        // Ambil role dari sessionStorage
+        const storedRole = sessionStorage.getItem('userRole');
+        
+        // Jika bukan admin, langsung redirect ke dashboard
+        if (storedRole !== 'admin') {
+            router.push('/dashboard');
+            return; // Hentikan eksekusi lebih lanjut jika bukan admin
+        }
+    
+        // Fetch detail pegawai berdasarkan ID
         const fetchPegawaiDetail = async () => {
             const response = await fetch(`/api/pegawai/getEmployee?id=${id}`);
             if (response.ok) {
@@ -33,19 +43,20 @@ const EditPegawai: React.FC = () => {
                 console.error('Failed to fetch pegawai details');
             }
         };
-
+    
+        // Fetch role pengguna
         const fetchUserRole = async () => {
             const response = await fetch('/api/authUser'); // Ambil role pengguna
             if (response.ok) {
-                // const user = await response.json();
+                // Logic yang bisa ditambahkan jika perlu
             }
         };
-
+    
         if (id) {
             fetchPegawaiDetail();
             fetchUserRole(); // Ambil role pengguna saat ID tersedia
         }
-    }, [id]);
+    }, [id, router]); // Menambahkan router untuk dependency array    
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         if (employee) {

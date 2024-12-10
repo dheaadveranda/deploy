@@ -16,7 +16,7 @@ const Sidebar: FC<{ activeMenu: string; onMenuClick: (menu: string) => void }> =
             router.push('/login');
         } else {
             setRole(storedRole);
-            if (storedRole !== 'admin') {
+            if (storedRole !== 'admin' && router.pathname === '/pegawai') {
                 router.push('/dashboard');
             }
         }

@@ -19,7 +19,12 @@ const AddPegawai: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false); // State untuk kontrol tampilan password
 
     useEffect(() => {
-        // Fetch ID terbaru
+        const storedRole = sessionStorage.getItem('userRole');
+        if (storedRole !== 'admin') {
+            router.push('/dashboard');
+            return; // Hentikan eksekusi lebih lanjut
+        }
+
         const fetchLatestID = async () => {
             const response = await fetch('/api/pegawai/getLatestID');
             const data = await response.json();
@@ -30,19 +35,17 @@ const AddPegawai: React.FC = () => {
             }
             setIdPegawai(newID);
         };
-
+    
         fetchLatestID();
-
+    
         const fetchUserRole = async () => {
             const response = await fetch('/api/authUser');
             if (response.ok) {
 
             }
         };
-
-
         fetchUserRole();
-    }, []);
+    }, [router]);    
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
