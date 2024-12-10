@@ -1,4 +1,3 @@
-//transaksi.tsx
 // pages/transaksi.tsx
 import { useState, useEffect } from 'react';
 import styles from '../style/transaksi.module.css';
@@ -13,7 +12,7 @@ interface Customer {
     TglDaftar: string;
     TotalPoin: number;
 }
-
+ 
 interface Employee {
     IDPegawai: string;
     NamaPegawai: string;
@@ -21,7 +20,7 @@ interface Employee {
     TglBergabung: string;
     Peran: string;
 }
-
+ 
 interface Menu {
     IDMenu: string;
     Gambar: string;
@@ -30,7 +29,7 @@ interface Menu {
     Deskripsi: string;
     KategoriMenu: string;
 }
-
+ 
 interface TransactionItem {
     IDTransaksi: string;
     TglTransaksi: string;
@@ -42,7 +41,7 @@ interface TransactionItem {
     Diskon: number;
     KategoriMenu: string;
 }
-
+ 
 const Transaksi: React.FC = () => {
     const [activeMenu, setActiveMenu] = useState('Transaksi');
     const [nominal, setNominal] = useState('');
@@ -63,9 +62,9 @@ const Transaksi: React.FC = () => {
     const [discount, setdiscount] = useState(0);
     const [metodePembayaran, setMetodePembayaran] = useState<string>('Cash'); // Default: Cash
     const [customers, setCustomers] = useState<Customer[]>([]);
-    const [poin, setPoin] = useState("");
+    const [poin, setPoin] =useState("");
     const [currentCustomers, setCurrentCustomers] = useState<Customer[]>([]);
-
+   
     useEffect(() => {
         const getCurrentDate = () => {
             const date = new Date();
@@ -74,22 +73,20 @@ const Transaksi: React.FC = () => {
             const day = String(date.getDate()).padStart(2, '0');
             return `${year}-${month}-${day}`;
         };
-
-        console.log(getCurrentDate());
-
+       
         const fetchCustomers = async () => {
             const response = await fetch('/api/pelanggan/getCustomer');
             const data = await response.json();
             setCustomers(data);
         };
         fetchCustomers();
-
+ 
         setToday(getCurrentDate());
-
+ 
         fetchData('/api/menu/getMenu', setMenuList, () => setMenuList([]));
         fetchData('/api/pegawai/getEmployee', setPegawaiList, () => setPegawaiList([]));
         fetchData('/api/pelanggan/getCustomer', setPelangganList, () => setPelangganList([]));
-
+ 
         fetch('/api/transaksi/getLatestTransactionID')
             .then(response => response.json())
             .then((data) => {
@@ -100,28 +97,28 @@ const Transaksi: React.FC = () => {
             })
             .catch(() => setTransactionID('TRX0001'));
     }, []);
-
+ 
     const itemsPerPage = 10;
     const currentItems = menuList
         .filter(menu => menu.NamaMenu.toLowerCase().includes(searchTerm.toLowerCase()))
         .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
+ 
     const handlePageChange = (pageNumber: number) => setCurrentPage(pageNumber);
-
+ 
     const calculateTotalBayar = () => {
         const total = transactions.reduce((total, item) => total + (Number(item.SubTotal) || 0), 0);
         return isDiscountApplied ? total * 0.9 : total; // Jika diskon diterapkan, kurangi total dengan 10%
-    };
-
+    };    
+ 
     const toggleModal = () => setIsModalOpen(prev => !prev);
-
+ 
     const handleAddToTransaction = (menu: Menu) => {
         if (menu.HargaMenu != null) {
             setTransactions((prevTransactions) => {
                 const existingItemIndex = prevTransactions.findIndex(
                     (item) => item.IDTransaksi === menu.IDMenu
                 );
-
+ 
                 if (existingItemIndex !== -1) {
                     const updatedTransactions = [...prevTransactions];
                     const existingItem = updatedTransactions[existingItemIndex];
@@ -142,7 +139,7 @@ const Transaksi: React.FC = () => {
                         JumlahPesan: 1,
                         SubTotal: menu.HargaMenu,
                         TotalHarga: menu.HargaMenu,
-                        KategoriMenu: menu.KategoriMenu,
+                        KategoriMenu:menu.KategoriMenu,
                         Diskon: 0
                     };
                     return [...prevTransactions, newTransactionItem];
@@ -153,46 +150,43 @@ const Transaksi: React.FC = () => {
             alert('This menu item does not have a valid price.');
         }
     };
-
+ 
     const handleDeleteTransaction = (id: string) =>
         setTransactions(transactions.filter(transaction => transaction.IDTransaksi !== id));
-
+ 
     const handleApplyDiscount = () => {
         if (!referralCode) {
             alert('Silakan masukkan kode referral untuk mendapatkan diskon!');
             return;
         }
-
+   
         if (isDiscountApplied) {
             alert('Diskon sudah diterapkan sebelumnya.');
             return;
         }
-
+   
         const totalWithDiscount = calculateTotalBayar() * 0.9; // Diskon 10%
         const discountAmount = calculateTotalBayar() - totalWithDiscount;
-
+       
         setdiscount(discountAmount); // Simpan nilai diskon
         setKembalian(Number(totalWithDiscount) - Number(nominal)); // Update kembalian
         setIsDiscountApplied(true); // Tandai diskon sudah diterapkan
         alert(`Diskon 10% telah diterapkan!`);
-    };
-
+    };      
+   
     const handleSaveTransaction = () => {
         // 1. Konversi nominal ke number
         const nominalValue = parseFloat(nominal);
-
+   
         // 2. Validasi transaksi, pelanggan, pegawai, dan nominal pembayaran
         if (!transactions.length) return alert('Tidak ada transaksi untuk disimpan!');
         if (!selectedPelanggan) return alert('Silakan pilih pelanggan sebelum menyimpan transaksi.');
         if (!selectedPegawai) return alert('Silakan pilih pegawai sebelum menyimpan transaksi.');
-
+   
         // 3. Siapkan objek payload yang akan digunakan untuk semua jenis transaksi
-        // let TglTransaksi = new Date().toISOString().replace('T', ' ').split('.')[0];
-
         const payload: any = {
             Transaksi: transactionID,
-            TglTransaksi: new Date().toISOString(),
-            // TglTransaksi: TglTransaksi,
+            TglTransaksi: new Date().toISOString().split('T')[0],  // Format tanggal
             IDPegawai: selectedPegawai.IDPegawai,
             IDPelanggan: selectedPelanggan?.IDPelanggan || 'GUEST0001',
             Items: transactions,
@@ -203,7 +197,7 @@ const Transaksi: React.FC = () => {
             kembalian: 0,
         };
         console.log('Payload Beingg sent:', payload);
-
+   
         // 4. Jika metode pembayaran adalah "Poin"
         if (metodePembayaran === "Poin") {
             // a. Validasi poin pelanggan
@@ -211,24 +205,24 @@ const Transaksi: React.FC = () => {
                 alert("Poin tidak mencukupi!");
                 return;
             }
-
+   
             // b. Validasi menu yang eligible (misalnya hanya menu tertentu yang bisa dibayar dengan poin)
             const eligibleMenu = transactions.filter((transaction) =>
                 ["Coffee", "MilkBased", "Tea"].includes(transaction.KategoriMenu)
             );
-
+   
             if (eligibleMenu.length !== 1 || eligibleMenu.some(item => item.JumlahPesan > 1)) {
                 alert("Hanya boleh memilih satu menu dari kategori Coffee, MilkBased, atau Tea.");
                 return;
             }
-
+   
             // c. Kurangi poin pelanggan
             // const updatedPelanggan = {
             //     ...selectedPelanggan,
             //     TotalPoin: selectedPelanggan.TotalPoin - 10,  // Misal, setiap transaksi mengurangi 10 poin
             // };
             // setSelectedPelanggan(updatedPelanggan);  // Update pelanggan setelah poin berkurang
-
+           
             // d. Perbarui payload untuk transaksi menggunakan poin
             // payload.TotalPoin = updatedPelanggan.TotalPoin;
             payload.TotalBayar = 0;  // Tidak ada pembayaran yang harus dibayar jika menggunakan poin
@@ -237,39 +231,39 @@ const Transaksi: React.FC = () => {
         } else {
             // 5. Jika metode pembayaran adalah uang (nominal)
             if (isNaN(nominalValue) || nominalValue <= 0) return alert('Silakan bayar dengan nominal yang valid.');
-
+   
             // 6. Hitung total bayar dan kembalian
             const totalBayar = calculateTotalBayar(); // Fungsi untuk menghitung total transaksi
             const calculatedKembalian = nominalValue - totalBayar;
-
+   
             // 7. Validasi kembalian
             if (calculatedKembalian < 0) {
                 alert('Nominal tidak mencukupi total pembayaran!');
                 return;
             }
-
+   
             // 8. Perbarui payload untuk transaksi menggunakan uang
             payload.TotalBayar = totalBayar;
             payload.kembalian = calculatedKembalian;
-
+   
             // 9. Validasi referral code (hanya untuk GUEST)
             const isGuest = selectedPelanggan?.NamaPelanggan?.startsWith('GUEST');
             if (!isGuest && referralCode) {
                 alert("Referral code can only be used by GUEST customers.");
                 return;
             }
-
+   
             payload.ReferralCode = isGuest ? referralCode : null;
         }
-
+   
         console.log('Payload transaksi:', payload);
-
+   
         // 10. Simpan transaksi ke server
         saveTransactionToServer(payload);
     };
-
-
-
+   
+ 
+ 
     // Fungsi untuk menyimpan transaksi ke server
     const saveTransactionToServer = (payload: any) => {
         fetch('/api/transaksi/saveTransaction', {
@@ -277,41 +271,39 @@ const Transaksi: React.FC = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    // Transaksi berhasil
-                    alert('Transaksi berhasil disimpan!');
-                    setTransactions([]); // Reset transaksi
-                    setNominal(''); // Reset nominal
-                    setKembalian(0); // Reset kembalian
-                    setTransactionID(`TRX${(parseInt(transactionID.replace('TRX', ''), 10) + 1).toString().padStart(4, '0')}`); // Generate ID baru
-                    console.log('data pelanggan yang diperbaharui:', data);
-
-                    // if (data.updatedPelanggan) {
-                    //     setSelectedPelanggan(data.updatedPelanggan);
-                    //     handleNewupdateCustomer(data.updatedPelanggan);
-                    //     console.log('data pelanggan yang diperbaharui:', data.updatedPelanggan);
-                    // }
-
-                    // Tangani kode referral baru (jika ada)
-                    if (data.KodeReferralBaru) {
-                        alert(`Kode referral sudah mencapai batas. Gunakan kode referral baru: ${data.KodeReferralBaru}`);
-                        handleNewReferralCode(data.KodeReferralBaru); // Update referral di frontend
-                    }
-                } else {
-                    // Tampilkan pesan error dari server
-                    alert(data.message || 'Gagal menyimpan transaksi.');
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                // Transaksi berhasil
+                alert('Transaksi berhasil disimpan!');
+                setTransactions([]); // Reset transaksi
+                setNominal(''); // Reset nominal
+                setKembalian(0); // Reset kembalian
+                setTransactionID(`TRX${(parseInt(transactionID.replace('TRX', ''), 10) + 1).toString().padStart(4, '0')}`); // Generate ID baru
+                console.log('data pelanggan yang diperbaharui:', data);
+   
+                // if (data.updatedPelanggan) {
+                //     setSelectedPelanggan(data.updatedPelanggan);
+                //     handleNewupdateCustomer(data.updatedPelanggan);
+                //     console.log('data pelanggan yang diperbaharui:', data.updatedPelanggan);
+                // }
+               
+                // Tangani kode referral baru (jika ada)
+                if (data.KodeReferralBaru) {
+                    alert(`Kode referral sudah mencapai batas. Gunakan kode referral baru: ${data.KodeReferralBaru}`);
+                    handleNewReferralCode(data.KodeReferralBaru); // Update referral di frontend
                 }
-            })
-            .catch((error) => {
-                console.error('Kesalahan saat menyimpan transaksi:', error.message);
-                alert(`Terjadi kesalahan saat menyimpan transaksi: ${error.message}`);
-            });
-            let test = fetch('/api/transaksi/saveTransaction');
-        console.log(test);
+            } else {
+                // Tampilkan pesan error dari server
+                alert(data.message || 'Gagal menyimpan transaksi.');
+            }
+        })
+        .catch((error) => {
+            console.error('Kesalahan saat menyimpan transaksi:', error.message);
+            alert(`Terjadi kesalahan saat menyimpan transaksi: ${error.message}`);
+        });
     };
-
+ 
     const handleCancelTransaction = () => {
         setTransactions([]);
         setNominal('');
@@ -328,14 +320,14 @@ const Transaksi: React.FC = () => {
             })
             .catch(() => setTransactionID('TRX0001'));
     };
-
+ 
     return (
         <div className={styles.container}>
-            <Sidebar activeMenu={activeMenu} onMenuClick={setActiveMenu} />
+            <Sidebar activeMenu={activeMenu} onMenuClick={setActiveMenu}/>
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Transaksi</h1>
                 <hr className={styles.separator} />
-
+ 
                 <div className={styles.inputContainer}>
                     <div className={styles.inputField}>
                         <label>ID Transaksi</label>
@@ -376,9 +368,9 @@ const Transaksi: React.FC = () => {
                         />
                     </div>
                 </div>
-
+ 
                 <button className={styles.addButton} onClick={toggleModal}>Add Menu</button>
-
+ 
                 <Modal show={isModalOpen} onClose={toggleModal} title="Daftar Menu">
                     <input
                         type="text"
@@ -398,25 +390,25 @@ const Transaksi: React.FC = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentItems.map((menu, index) => (
-                                <tr key={menu.IDMenu}>
-                                    <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                                    <td>
-                                        <img
-                                            src={menu.Gambar}
-                                            alt={menu.NamaMenu}
-                                            className={styles.menuImage}
-                                        />
-                                    </td>
-                                    <td>{menu.NamaMenu}</td>
-                                    <td>Rp {menu.HargaMenu?.toLocaleString('id-ID') || 'N/A'}</td>
-                                    <td>
-                                        <button onClick={() => handleAddToTransaction(menu)} className={styles.addButton}>
-                                            Tambah
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
+                        {currentItems.map((menu, index) => (
+                            <tr key={menu.IDMenu}>
+                                <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                                <td>
+                                    <img
+                                        src={menu.Gambar}
+                                        alt={menu.NamaMenu}
+                                        className={styles.menuImage}
+                                    />
+                                </td>
+                                <td>{menu.NamaMenu}</td>
+                                <td>Rp {menu.HargaMenu?.toLocaleString('id-ID') || 'N/A'}</td>
+                                <td>
+                                    <button onClick={() => handleAddToTransaction(menu)} className={styles.addButton}>
+                                        Tambah
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                     <div className={styles.pagination}>
@@ -431,7 +423,7 @@ const Transaksi: React.FC = () => {
                         ))}
                     </div>
                 </Modal>
-
+ 
                 <div className={styles.tableContainer}>
                     <table className={styles.transactionTable}>
                         <thead>
@@ -501,7 +493,7 @@ const Transaksi: React.FC = () => {
                                     <td>Rp {transaction.SubTotal.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</td>
                                     <td>
                                         <button onClick={() => handleDeleteTransaction(transaction.IDTransaksi)}>
-                                            <Icon icon="mdi:delete" width="24" height="24" className={`${styles.actionIcon} ${styles.deleteIcon}`} />
+                                            <Icon icon="mdi:delete" width="24" height="24" className={`${styles.actionIcon} ${styles.deleteIcon}`}/>
                                         </button>
                                     </td>
                                 </tr>
@@ -509,7 +501,7 @@ const Transaksi: React.FC = () => {
                         </tbody>
                     </table>
                 </div>
-
+ 
                 <div className={styles.paymentContainer}>
                     {/* Total Bayar */}
                     <div className={styles.totalContainer}>
@@ -544,71 +536,71 @@ const Transaksi: React.FC = () => {
                                     </div>
                                 ))}
                             </div> */}
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.totalContainer}>
+                        <div className={styles.totalContainer}>
                         <label>Total Bayar:</label>
                         <div className={styles.resultContainer}>
                             Rp {calculateTotalBayar().toLocaleString('id-ID', { minimumFractionDigits: 2 })}
                         </div>
+                        </div>
                     </div>
-                </div>
-
-                {/* Nominal */}
-                <div className={styles.totalContainer}>
-                    <label>Nominal:</label>
-                    <div className={styles.nominalContainer}>
-                        <span className={styles.inputPrefix}>Rp</span>
-                        <input
-                            type="number"
-                            value={nominal}
-                            onChange={(e) => setNominal(e.target.value)}
-                            className={styles.nominalInput}
-                        />
+ 
+                    {/* Nominal */}
+                    <div className={styles.totalContainer}>
+                        <label>Nominal:</label>
+                        <div className={styles.nominalContainer}>
+                            <span className={styles.inputPrefix}>Rp</span>
+                            <input
+                                type="number"
+                                value={nominal}
+                                onChange={(e) => setNominal(e.target.value)}
+                                className={styles.nominalInput}
+                            />
+                        </div>
                     </div>
-                </div>
-
-                {/* Kembalian */}
-                <div className={styles.totalContainer}>
-                    <label>Kembalian:</label>
-                    <div className={styles.resultContainer}>
-                        Rp {kembalian.toLocaleString('id-ID')}
+ 
+                    {/* Kembalian */}
+                    <div className={styles.totalContainer}>
+                        <label>Kembalian:</label>
+                        <div className={styles.resultContainer}>
+                            Rp {kembalian.toLocaleString('id-ID')}
+                        </div>
                     </div>
-                </div>
-
-                {/* Diskon */}
-                <div className={styles.totalContainer}>
-                    <label>Diskon:</label>
-                    <div className={styles.resultContainer}>
-                        {referralCode ? `Rp ${discount.toLocaleString('id-ID', { minimumFractionDigits: 2 })}` : '-'}
-
-                        {/* Ikon untuk Menerapkan Diskon */}
-                        <Icon
-                            icon="uim:process"
-                            width="24"
-                            height="24"
-                            className={styles.discountIcon}
-                            onClick={handleApplyDiscount}
-                        />
+ 
+                    {/* Diskon */}
+                    <div className={styles.totalContainer}>
+                        <label>Diskon:</label>
+                        <div className={styles.resultContainer}>
+                            {referralCode ? `Rp ${discount.toLocaleString('id-ID', { minimumFractionDigits: 2 })}` : '-'}
+ 
+                            {/* Ikon untuk Menerapkan Diskon */}
+                            <Icon
+                                icon="uim:process"
+                                width="24"
+                                height="24"
+                                className={styles.discountIcon}
+                                onClick={handleApplyDiscount}
+                            />
+                        </div>
                     </div>
-                </div>
-
-                {/* Tombol Simpan dan Batal */}
-                <div className={styles.buttonContainer}>
-                    <button className={styles.saveButton} onClick={handleSaveTransaction}>
-                        Simpan
-                    </button>
-                    <button className={styles.cancelButton} onClick={handleCancelTransaction}>
-                        Batal
-                    </button>
-                </div>
-            </div>
+ 
+                    {/* Tombol Simpan dan Batal */}
+                    <div className={styles.buttonContainer}>
+                        <button className={styles.saveButton} onClick={handleSaveTransaction}>
+                            Simpan
+                        </button>
+                        <button className={styles.cancelButton} onClick={handleCancelTransaction}>
+                            Batal
+                        </button>
+                    </div>
+             </div>
         </div>
     );
 };
-
+ 
 export default Transaksi;
-
+ 
 function handleNewReferralCode(KodeReferralBaru: any) {
     throw new Error('Function not implemented.');
 }
