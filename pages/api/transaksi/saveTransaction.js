@@ -31,14 +31,14 @@ export default async function handler(req, res) {
  
             // Validasi dan pengurangan poin jika TotalPoin tersedia
             if (TotalPoin && TotalPoin >= 10) {
-                const poinQuery = `SELECT TotalPoin FROM Pelanggan WHERE IDPelanggan = ?`;
+                const poinQuery = `SELECT TotalPoin FROM pelanggan WHERE IDPelanggan = ?`;
                 const [poinResult] = await pool.execute(poinQuery, [IDPelanggan]);
  
                 if (poinResult.length === 0 || poinResult[0].TotalPoin < 10) {
                     throw new Error('Poin tidak mencukupi!');
                 }
  
-                const updatePoinQuery = `UPDATE Pelanggan SET TotalPoin = TotalPoin - 10 WHERE IDPelanggan = ?`;
+                const updatePoinQuery = `UPDATE pelanggan SET TotalPoin = TotalPoin - 10 WHERE IDPelanggan = ?`;
                 await pool.execute(updatePoinQuery, [IDPelanggan]);
                 metodePembayaran = 'Poin';
                 finalpoin = 10;
@@ -47,7 +47,7 @@ export default async function handler(req, res) {
             // Validasi kode referral
             let finalReferralCode = null;
             if (ReferralCode) {
-                const referralQuery = `SELECT KuotaPenggunaan, IDPelanggan FROM Referral WHERE KodeReferral = ?`;
+                const referralQuery = `SELECT KuotaPenggunaan, IDPelanggan FROM referral WHERE KodeReferral = ?`;
                 const [referralResult] = await pool.execute(referralQuery, [ReferralCode]);
  
                 if (referralResult.length === 0) {
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
                 if (KuotaPenggunaan >= 5) {
                     const newReferralCode = `REF${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
                     const insertNewReferralQuery = `
-                        INSERT INTO Referral (KodeReferral, KuotaPenggunaan, IDPelanggan)
+                        INSERT INTO referral (KodeReferral, KuotaPenggunaan, IDPelanggan)
                         VALUES (?, 0, ?)
                     `;
                     await pool.execute(insertNewReferralQuery, [newReferralCode, OwnerID]);
@@ -68,10 +68,10 @@ export default async function handler(req, res) {
                 discount = 0.10;
                 TotalHarga = TotalHarga * (1 - discount);
  
-                const updateReferralQuery = `UPDATE Referral SET KuotaPenggunaan = KuotaPenggunaan + 1 WHERE KodeReferral = ?`;
+                const updateReferralQuery = `UPDATE referral SET KuotaPenggunaan = KuotaPenggunaan + 1 WHERE KodeReferral = ?`;
                 await pool.execute(updateReferralQuery, [ReferralCode]);
  
-                const updatePelangganQuery = `UPDATE Pelanggan SET TotalPoin = TotalPoin + 1 WHERE IDPelanggan = ?`;
+                const updatePelangganQuery = `UPDATE pelanggan SET TotalPoin = TotalPoin + 1 WHERE IDPelanggan = ?`;
                 await pool.execute(updatePelangganQuery, [IDPelanggan]);
  
                 if (OwnerID.startsWith('CUST')) {
@@ -84,7 +84,7 @@ export default async function handler(req, res) {
             // Simpan transaksi
             const totalJumlahPesan = Items.reduce((total, item) => total + item.JumlahPesan, 0);
             const insertTransaksiQuery = `
-                INSERT INTO Transaksi
+                INSERT INTO transaksi
                 (IDTransaksi, TglTransaksi, IDPegawai, IDPelanggan, TotalHarga, Discount, JumlahPesan, KodeReferral, PenggunaanPoin, MetodePembayaran)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             `;
@@ -103,7 +103,7 @@ export default async function handler(req, res) {
  
             // Simpan detail transaksi menggunakan Promise.all
             const insertLaporanTransaksiQuery = `
-                INSERT INTO LaporanTransaksi
+                INSERT INTO laporantransaksi
                 (IDTransaksi, TglTransaksi, IDMenu, JumlahPesan, SubTotal)
                 VALUES (?, ?, ?, ?, ?)
             `;
