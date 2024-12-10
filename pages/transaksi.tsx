@@ -187,7 +187,7 @@ const Transaksi: React.FC = () => {
         // 3. Siapkan objek payload yang akan digunakan untuk semua jenis transaksi
         const payload: any = {
             Transaksi: transactionID,
-            TglTransaksi: new Date().toISOString().split('T')[0],  // Format tanggal
+            TglTransaksi: new Date().toISOString(),
             IDPegawai: selectedPegawai.IDPegawai,
             IDPelanggan: selectedPelanggan?.IDPelanggan || 'GUEST0001',
             Items: transactions,
