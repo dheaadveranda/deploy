@@ -69,7 +69,7 @@ const Dashboard: React.FC = () => {
         if (!dashboardData || !dashboardData.revenueData) return {
             labels: [],
             datasets: [],
-        };
+        }; 
 
         const filteredRevenueData = dashboardData.revenueData.filter(
             (data: RevenueData) => data.year === parseInt(yearFilter)

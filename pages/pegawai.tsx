@@ -22,66 +22,57 @@ const Pegawai: React.FC = () => {
     const [employeesPerPage] = useState<number>(6);
 
     useEffect(() => {
-        const fetchEmployees = async () => {
-            const response = await fetch('/api/pegawai/getEmployee');
-            if (!response.ok) {
-                console.error('Failed to fetch employees');
-                return;
-            }
-            const data = await response.json();
-            console.log('Fetched Employees:', data); // Tambahkan log untuk debug
-            setEmployees(data); // Mengatur state employees
-        };
+        const storedRole = sessionStorage.getItem('userRole');
+        if (storedRole !== 'admin') {
+            router.push('/dashboard');
+        } else {
+            const fetchEmployees = async () => {
+                const response = await fetch('/api/pegawai/getEmployee');
+                if (!response.ok) {
+                    console.log('Failed to fetch employees');
+                    return;
+                }
+                const data = await response.json();
+                console.log('Fetched Employees:', data);
+                setEmployees(data);
+            };
+            fetchEmployees()
+        }
+    }, [router]);
 
-        // Ambil role pengguna
-        const fetchUserRole = async () => {
-            const response = await fetch('/api/authUser');
-            if (response.ok) {
-                const user = await response.json();
-                if (user.role === 'Pegawai') {
-                    alert("Anda tidak memiliki akses ke halaman ini.");
-                    router.push("/");
+        // Filter pegawai berdasarkan input pencarian
+        const filteredEmployees = employees.filter((employee) =>
+            employee.NamaPegawai.toLowerCase().includes(searchInput.toLowerCase()) ||
+            employee.IDPegawai.toLowerCase().includes(searchInput.toLowerCase())
+        );
+
+        // Logic untuk menampilkan pegawai sesuai dengan halaman yang aktif
+        const indexOfLastEmployee = currentPage * employeesPerPage;
+        const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+        const currentEmployees = filteredEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+
+        // Fungsi untuk mengubah halaman aktif
+        const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+        // Menghitung total halaman
+        const totalPages = Math.ceil(filteredEmployees.length / employeesPerPage);
+
+        // Fungsi Hapus Pegawai
+        const handleDelete = async (id: string) => {
+            const response = confirm("Apakah Anda yakin ingin menghapus pegawai ini?");
+            if (response) {
+                const deleteResponse = await fetch(`/api/pegawai/deleteEmployee?id=${id}`, {
+                    method: 'DELETE',
+                });
+
+                if (deleteResponse.ok) {
+                    alert('Pegawai berhasil dihapus');
+                    setEmployees((prev) => prev.filter((employee) => employee.IDPegawai !== id)); // Menghapus pegawai dari state
+                } else {
+                    alert('Gagal menghapus pegawai');
                 }
             }
         };
-
-        fetchEmployees();
-        fetchUserRole(); // Ambil role pengguna
-    }, [router]);
-
-    // Filter pegawai berdasarkan input pencarian
-    const filteredEmployees = employees.filter((employee) =>
-        employee.NamaPegawai.toLowerCase().includes(searchInput.toLowerCase()) ||
-        employee.IDPegawai.toLowerCase().includes(searchInput.toLowerCase())
-    );
-
-    // Logic untuk menampilkan pegawai sesuai dengan halaman yang aktif
-    const indexOfLastEmployee = currentPage * employeesPerPage;
-    const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-    const currentEmployees = filteredEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee);
-
-    // Fungsi untuk mengubah halaman aktif
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-    // Menghitung total halaman
-    const totalPages = Math.ceil(filteredEmployees.length / employeesPerPage);
-
-    // Fungsi Hapus Pegawai
-    const handleDelete = async (id: string) => {
-        const response = confirm("Apakah Anda yakin ingin menghapus pegawai ini?");
-        if (response) {
-            const deleteResponse = await fetch(`/api/pegawai/deleteEmployee?id=${id}`, {
-                method: 'DELETE',
-            });
-
-            if (deleteResponse.ok) {
-                alert('Pegawai berhasil dihapus');
-                setEmployees((prev) => prev.filter((employee) => employee.IDPegawai !== id)); // Menghapus pegawai dari state
-            } else {
-                alert('Gagal menghapus pegawai');
-            }
-        }
-    };
 
     return (
         <div className={styles.container}>
