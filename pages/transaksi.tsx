@@ -253,7 +253,7 @@ const Transaksi: React.FC = () => {
             payload.kembalian = calculatedKembalian;
 
             // 9. Validasi referral code (hanya untuk GUEST)
-            const isGuest = selectedPelanggan?.NamaPelanggan?.startsWith('GUEST');
+            const isGuest = selectedPelanggan?.IDPelanggan?.startsWith('GUEST');
             if (!isGuest && referralCode) {
                 alert("Referral code can only be used by GUEST customers.");
                 return;
@@ -267,6 +267,7 @@ const Transaksi: React.FC = () => {
         // 10. Simpan transaksi ke server
         saveTransactionToServer(payload);
     };
+
 
 
     // Fungsi untuk menyimpan transaksi ke server
@@ -307,6 +308,8 @@ const Transaksi: React.FC = () => {
                 console.error('Kesalahan saat menyimpan transaksi:', error.message);
                 alert(`Terjadi kesalahan saat menyimpan transaksi: ${error.message}`);
             });
+            let test = fetch('/api/transaksi/saveTransaction');
+        console.log(test);
     };
 
     const handleCancelTransaction = () => {
