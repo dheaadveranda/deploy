@@ -53,7 +53,7 @@ const EditStok: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const response = await fetch(`/api/stok/updateStok`, {
+        const response = await fetch(`/api/stok/updateStok?id=${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
