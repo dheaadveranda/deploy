@@ -7,7 +7,9 @@ export default async function handler(req, res) {
 
     try {
         // Query untuk mengambil ID transaksi terakhir
-        const [rows] = await db.query('SELECT IDTransaksi FROM Transaksi ORDER BY IDTransaksi DESC LIMIT 1');
+        const [rows] = await db.query('SELECT IDTransaksi FROM transaksi ORDER BY IDTransaksi DESC LIMIT 1');
+
+        console.log(rows);
 
         if (rows.length > 0) {
             const latestID = rows[0].IDTransaksi;

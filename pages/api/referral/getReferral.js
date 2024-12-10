@@ -5,8 +5,8 @@ export default async function handler(req, res) {
         try {
             const query = `
                 SELECT r.IDPelanggan, r.KodeReferral, r.KuotaPenggunaan, p.NamaPelanggan
-                FROM Referral r
-                LEFT JOIN Pelanggan p ON r.IDPelanggan = p.IDPelanggan
+                FROM referral r
+                LEFT JOIN pelanggan p ON r.IDPelanggan = p.IDPelanggan
                 ORDER BY r.IDPelanggan, r.KodeReferral
             `;
 

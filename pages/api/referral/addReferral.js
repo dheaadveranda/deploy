@@ -23,23 +23,28 @@ export default async function handler(req, res) {
         // Check current referral status
         const queryCheckReferral = `
             SELECT KuotaPenggunaan 
-            FROM Referral 
+            FROM referral 
             WHERE IDPelanggan = ? 
-            ORDER BY KuotaPenggunaan DESC 
+            ORDER BY KuotaPenggunaan DESC
             LIMIT 1
         `;
         const [referralRows] = await db.execute(queryCheckReferral, [normalizedID]);
+        console.log(referralRows);
 
-        // If quota is full, create a new referral code
-        if (referralRows.length > 0 && referralRows[0].KuotaPenggunaan >= 5) {
+        // If quota is full, create a new referral code 
+        // if (referralRows.length > 0 && referralRows[0].KuotaPenggunaan >= 5) {
+        // if (referralRows.length === 0 && referralRows[0].KuotaPenggunaan === 5) {
+        if (referralRows.length === 0 || referralRows.KuotaPenggunaan === 5) {
             const newReferralCode = generateReferralCode();
 
             // Insert new referral
             const queryInsertReferral = `
-                INSERT INTO Referral (IDPelanggan, KodeReferral, KuotaPenggunaan) 
+                INSERT INTO referral (IDPelanggan, KodeReferral, KuotaPenggunaan) 
                 VALUES (?, ?, ?)
             `;
             await db.execute(queryInsertReferral, [normalizedID, newReferralCode, 0]);
+
+            console.log('referral sudah terupdate');
 
             return res.status(200).json({
                 message: 'Referral baru berhasil dibuat',
