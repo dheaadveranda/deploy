@@ -253,7 +253,7 @@ const Transaksi: React.FC = () => {
             payload.kembalian = calculatedKembalian;
 
             // 9. Validasi referral code (hanya untuk GUEST)
-            const isGuest = selectedPelanggan?.IDPelanggan?.startsWith('GUEST');
+            const isGuest = selectedPelanggan?.NamaPelanggan?.startsWith('GUEST');
             if (!isGuest && referralCode) {
                 alert("Referral code can only be used by GUEST customers.");
                 return;
