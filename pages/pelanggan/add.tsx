@@ -71,7 +71,7 @@ const AddPelanggan: React.FC = () => {
  
     return (
         <div className={styles.container}>
-            <Sidebar activeMenu="Pegawai" onMenuClick={() => { }}/>
+            <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }}/>
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Pelanggan</h1>
                 <hr className={styles.separator} />
