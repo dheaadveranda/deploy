@@ -1,69 +1,61 @@
 /* referralAdd.module.css */
- 
-.container {
-    display: flex; /* Mengatur container menjadi flex */
-    height: 100vh; /* Tinggi penuh viewport */
-}
- 
 .main {
-    flex: 1; /* Mengambil sisa ruang untuk konten utama */
-    padding: 30px; /* Jarak di sekitar konten utama */
-    margin-left: 300px; /* Memberi ruang antara sidebar dan konten utama */
-    background-color: #F5F6FA; /* Warna latar belakang untuk konten */
-    border-radius: 8px; /* Sudut melengkung untuk konten */
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    margin-left: 200px;
+    height: auto;
 }
  
 .pageTitle {
-    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
-    font-size: 39px; /* Ukuran font untuk judul halaman */
-    margin-bottom: 20px; /* Jarak di bawah judul */
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
 }
- 
-/* Garis Pemisah */
+
 .separator {
-    margin: 20px 0; /* Jarak di bawah judul */
-    border: 2px solid #e0e0e0; /* Garis pemisah */
+    margin: 20px 0;
+    border: 1px solid #e0e0e0;
 }
  
-/* Judul Ringkasan Penjualan */
-.addMenuTitle,
-.editMenuTitle {
+.tambahReferralTitle {
     font-family: 'Poppins', sans-serif;
     font-size: 22px;
-    margin-bottom: 20px; /* Jarak di bawah subjudul */
-    color: #375BB2; /* Warna untuk subjudul */
+    margin-bottom: 20px;
+    color: #375BB2;
 }
  
-/* Kontainer input */
 .inputContainer {
-    display: flex; /* Menggunakan flex untuk menyusun label dan input */
-    justify-content: space-between; /* Memisahkan label dan input ke kiri dan kanan */
-    align-items: center; /* Menyelaraskan secara vertikal */
-    margin-bottom: 15px; /* Jarak di bawah setiap input */
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
- 
-/* Label untuk input */
+
 .inputContainer label {
-    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
-    font-weight: bold; /* Menebalkan teks label */
-    color: #333; /* Warna untuk label */
-    width: 30%; /* Mengatur lebar label */
+    font-size: 16px;
+    color: #34495e;
+    font-weight: bold;
+    width: 25%;
+    margin-right: 1px;
 }
  
-/* Input untuk menu */
 .inputContainer input,
-.inputContainer select,
-.passwordContainerinput {
-    font-family: 'popins', sans-serif;
-    width: 100%; /* Memastikan input mengambil lebar penuh yang tersisa */
-    max-width: 65%;
-    padding: 10px; /* Padding di dalam input */
-    border: 1px solid #ccc; /* Batas pada input */
-    border-radius: 4px; /* Sudut input melengkung */
-    outline: none; /* Menghilangkan outline */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Bayangan untuk input */
+.inputContainer select {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
     box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.inputContainer select:focus {
+    border-color: #3498db;
+    outline: none;
 }
  
 .buttonContainer {

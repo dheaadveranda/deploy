@@ -96,7 +96,7 @@ const EditPegawai: React.FC = () => {
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Pegawai</h1>
                 <hr className={styles.separator} />
-                <h2 className={styles.pegawaiTitle}>Edit Pegawai</h2>
+                <h2 className={styles.editPegawaiTitle}>Edit Pegawai</h2>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.inputContainer}>
                         <label>ID Pegawai:</label>

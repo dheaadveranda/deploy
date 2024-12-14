@@ -68,7 +68,7 @@ const AddStok: React.FC = () => {
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Stok</h1>
                 <hr className={styles.separator} />
-                <h2 className={styles.addStokTitle}>Tambah Stok</h2>
+                <h2 className={styles.tambahStokTitle}>Tambah Stok</h2>
                 <form onSubmit={handleSubmit}>
                 <div className={styles.inputContainer}>
                         <label>ID Bahan</label>

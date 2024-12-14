@@ -1,10 +1,9 @@
-// pages/pelanggan/[id].tsx
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Sidebar from '../../components/Sidebar'; // Pastikan jalur ke Sidebar benar
-import styles from '../../style/pelanggan/pelangganDetail.module.css'; // Pastikan jalur ke file benar
+import Sidebar from '../../components/Sidebar';
+import styles from '../../style/pelanggan/pelangganDetail.module.css';
 
-interface Customer { 
+interface Customer {
     IDPelanggan: string;
     NamaPelanggan: string;
     NoHP: string;
@@ -16,36 +15,35 @@ interface Customer {
 
 const PelangganDetail: React.FC = () => {
     const router = useRouter();
-    const { id } = router.query; // Mengambil ID dari URL
-    const [customer, setCustomer] = useState<Customer | null>(null); // State untuk pelanggan
+    const { id } = router.query;
+    const [customer, setCustomer] = useState<Customer | null>(null);
 
     useEffect(() => {
         if (id) {
-            const fetchPelangganDetail = async () => {
+            const fetchCustomerDetail = async () => {
                 const response = await fetch(`/api/pelanggan/getCustomer?id=${id}`);
                 if (response.ok) {
                     const data = await response.json();
-                    setCustomer(data); // Menyimpan data pelanggan di state
+                    setCustomer(data);
                 } else {
-                    console.error('Failed to fetch pelanggan details');
+                    console.error('Failed to fetch customer details');
                 }
             };
 
-            fetchPelangganDetail();
+            fetchCustomerDetail();
         }
-    }, [id]); // Mengambil data pelanggan berdasarkan ID yang ada di URL
+    }, [id]);
 
-    if (!customer) return <div>Loading...</div>; // Tampilkan loading saat menunggu data
+    if (!customer) return <div>Loading...</div>;
 
     return (
-        <div className={styles.container}>
-            <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }}/>
-            <div className={styles.main}>
+        <div className={styles.main}>
+            <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }} />
+            <div>
                 <h1 className={styles.pageTitle}>Kelola Pelanggan</h1>
                 <hr className={styles.separator} />
                 <h2 className={styles.detailPelangganTitle}>Detail Pelanggan</h2>
                 <div className={styles.detailsContainer}>
-                    {/* Atribut tidak dalam kotak, dan hanya nilai yang ditampilkan di dalam kotak */}
                     <div className={styles.detailRow}>
                         <span className={styles.label}>ID Pelanggan</span>
                         <span className={styles.detailBox}>{customer.IDPelanggan}</span>
@@ -75,7 +73,13 @@ const PelangganDetail: React.FC = () => {
                         <span className={styles.detailBox}>{customer.TotalPoin}</span>
                     </div>
                     <div className={styles.buttonContainer}>
-                        <button type="button" onClick={() => router.push('/pelanggan')} className={styles.backButton}>Ok sip mantap</button>
+                        <button
+                            type="button"
+                            onClick={() => router.push('/pelanggan')}
+                            className={styles.backButton}
+                        >
+                            Kembali
+                        </button>
                     </div>
                 </div>
             </div>

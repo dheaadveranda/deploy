@@ -77,7 +77,7 @@ const AddReferral: React.FC = () => {
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Referral</h1>
                 <hr className={styles.separator} />
-                <h2 className={styles.addTReferralTitle}>Tambah Referral</h2>
+                <h2 className={styles.tambahReferralTitle}>Tambah Referral</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                     {/* ID Pelanggan (Tidak diubah, tetap ada) */}
                     <div className={styles.inputContainer}>

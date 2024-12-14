@@ -70,13 +70,15 @@ const AddPelanggan: React.FC = () => {
         <div className={styles.main}>
             <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }} />
             <div className={styles.content}>
-                <h1 className={styles.pageTitle}>Tambah Pelanggan</h1>
+            <h1 className={styles.pageTitle}>Kelola Pelanggan</h1>
+                <hr className={styles.separator} />
+                <h2 className={styles.tambahPelangganTitle}>Tambah Pelanggan</h2>
                 <form onSubmit={handleSubmit}>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>ID Pelanggan</label>
                         <input type="text" value={idPelanggan} readOnly />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Nama Pelanggan</label>
                         <input
                             type="text"
@@ -86,7 +88,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>No HP</label>
                         <input
                             type="text"
@@ -96,7 +98,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Email</label>
                         <input
                             type="email"
@@ -106,7 +108,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Alamat</label>
                         <input
                             type="text"
@@ -116,7 +118,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Tanggal Daftar</label>
                         <input
                             type="date"
@@ -125,7 +127,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Total Poin</label>
                         <input
                             type="text"

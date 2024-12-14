@@ -1,16 +1,3 @@
-/* .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10 px;
-    margin-left: 240px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
-    margin: 40px auto;
-} */
-
 .main {
     flex: 1;
     padding: 20px;
@@ -20,26 +7,51 @@
 }
 
 .pageTitle {
-    font-size: 28px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
     font-weight: bold;
     color: #2c3e50;
     margin-bottom: 20px;
 }
 
-.inputGroup {
-    width: 100%;
-    margin-bottom: 15px;
+.separator {
+    margin: 20px 0;
+    border: 1px solid #e0e0e0;
 }
 
-.inputGroup label {
-    font-size: 14px;
+/* Judul untuk form tambah pelanggan */
+.tambahPelangganTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #375BB2;
+}
+
+.editPelangganTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #375BB2;
+}
+
+/* Menggunakan flexbox untuk menyusun label dan input secara horizontal */
+.inputContainer {
+    display: flex;
+    align-items: center;  /* Menyelaraskan vertikal */
+    justify-content: space-between;  /* Memberi jarak antara label dan input */
+    margin-bottom: 10px;  /* Memberikan jarak bawah antara input */
+}
+
+.inputContainer label {
+    font-size: 16px;
     color: #34495e;
-    font-weight: 600;
-    margin-bottom: 8px;
+    font-weight: bold;
+    width: 25%;  /* Lebar label */
+    margin-right: 1px;  /* Jarak antara label dan input */
 }
 
-.inputGroup input {
-    width: 100%;
+.inputContainer input {
+    width: 100%;  /* Lebar input */
     padding: 12px;
     font-size: 14px;
     border-radius: 6px;
@@ -48,9 +60,10 @@
     transition: border-color 0.3s;
 }
 
-.inputGroup input:focus {
+/* Efek saat input dalam fokus */
+.inputContainer input:focus {
     border-color: #3498db;
-    /* background-color: #000; */
+    outline: none; /* Menghilangkan outline */
 }
 
 .buttonContainer {
@@ -67,8 +80,12 @@
     cursor: pointer;
     border: none;
     transition: background-color 0.3s;
+    font-weight: 600;
+    text-align: center;
+    min-width: 120px; /* Menambahkan lebar minimal untuk tombol */
 }
 
+/* Tombol Simpan */
 .saveButton {
     background-color: #28a745;
     color: #fff;
@@ -78,6 +95,7 @@
     background-color: #218838;
 }
 
+/* Tombol Batal */
 .cancelButton {
     background-color: transparent;
     border: 2px solid #e74c3c;

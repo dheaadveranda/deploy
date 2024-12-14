@@ -70,9 +70,11 @@ const EditPelanggan: React.FC = () => {
         <div className={styles.main}>
             <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }} />
             <div className={styles.content}>
-                <h1 className={styles.pageTitle}>Edit Pelanggan</h1>
+            <h1 className={styles.pageTitle}>Kelola Pelanggan</h1>
+            <hr className={styles.separator} />
+                <h1 className={styles.editPelangganTitle}>Edit Pelanggan</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>ID Pelanggan</label>
                         <input
                             type="text"
@@ -80,7 +82,7 @@ const EditPelanggan: React.FC = () => {
                             readOnly // ID tidak bisa diedit
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Nama Pelanggan</label>
                         <input
                             type="text"
@@ -90,7 +92,7 @@ const EditPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>No HP</label>
                         <input
                             type="text"
@@ -100,7 +102,7 @@ const EditPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Email</label>
                         <input
                             type="email"
@@ -110,7 +112,7 @@ const EditPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Alamat</label>
                         <input
                             type="text"
@@ -120,7 +122,7 @@ const EditPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Tanggal Daftar</label>
                         <input
                             type="date"
@@ -130,7 +132,7 @@ const EditPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputGroup}>
+                    <div className={styles.inputContainer}>
                         <label>Total Poin</label>
                         <input
                             type="text"

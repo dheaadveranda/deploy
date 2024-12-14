@@ -84,7 +84,7 @@ const AddPegawai: React.FC = () => {
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Pegawai</h1>
                 <hr className={styles.separator} />
-                <h2 className={styles.pegawaiTitle}>Tambah Pegawai</h2>
+                <h2 className={styles.tambahPegawaiTitle}>Tambah Pegawai</h2>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.inputContainer}>
                         <label>ID Pegawai</label>

@@ -75,7 +75,9 @@ const EditStok: React.FC = () => {
         <div className={styles.container}>
             <Sidebar activeMenu="Stok" onMenuClick={() => { }}/>
             <div className={styles.main}>
-                <h1 className={styles.pageTitle}>Edit Stok</h1>
+            <h1 className={styles.pageTitle}>Kelola Stok</h1>
+                <hr className={styles.separator} />
+                <h2 className={styles.editStokTitle}>Edit Stok</h2>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.inputContainer}>
                         <label>ID Bahan</label>
