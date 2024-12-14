@@ -1,9 +1,8 @@
-// pages/stok/add.tsx
 import { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar';
 import styles from '../../style/stok/stokAdd.module.css';
 import { useRouter } from 'next/router';
- 
+
 const AddStok: React.FC = () => {
     const router = useRouter();
     const [idBahan, setIdBahan] = useState('');
@@ -11,7 +10,11 @@ const AddStok: React.FC = () => {
     const [jumlah, setJumlah] = useState('');
     const [satuan, setSatuan] = useState('');
     const [keterangan, setKeterangan] = useState('');
- 
+    
+    // State for modal visibility and message
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+
     useEffect(() => {
         const fetchLatestID = async () => {
             const response = await fetch('/api/stok/getLatestID');
@@ -23,21 +26,13 @@ const AddStok: React.FC = () => {
             }
             setIdBahan(newID);
         };
- 
-        fetchLatestID();
-        const fetchUserRole = async () => {
-            const response = await fetch('/api/authUser');
-            if (response.ok) {
 
-            }
-        };
- 
-        fetchUserRole();
+        fetchLatestID();
     }, []);
- 
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-   
+
         const response = await fetch('/api/stok/addStok', {
             method: 'POST',
             headers: {
@@ -51,38 +46,40 @@ const AddStok: React.FC = () => {
                 Keterangan: keterangan,
             }),
         });
-   
+
         if (response.ok) {
-            alert('Stok berhasil ditambahkan');  
-            router.push('/stok');
+            setModalMessage('Stok berhasil ditambahkan');
+            setShowModal(true); // Show success message
+            setTimeout(() => router.push('/stok'), 1500); // Redirect after 1.5 seconds
         } else {
-            alert('Gagal menambahkan stok');
-            const errorMessage = await response.json();
-            console.error('Error:', errorMessage);
+            setModalMessage('Gagal menambahkan stok');
+            setShowModal(true); // Show failure message
         }
     };
- 
+
+    const closeModal = () => setShowModal(false); // Close modal
+
     return (
-        <div className={styles.container}>
-            <Sidebar activeMenu="Stok" onMenuClick={() => { }}/>
-            <div className={styles.main}>
+        <div className={styles.main}>
+            <Sidebar activeMenu="Stok" onMenuClick={() => { }} />
+            <div className={styles.mainContent}>
                 <h1 className={styles.pageTitle}>Kelola Stok</h1>
                 <hr className={styles.separator} />
                 <h2 className={styles.tambahStokTitle}>Tambah Stok</h2>
                 <form onSubmit={handleSubmit}>
-                <div className={styles.inputContainer}>
+                    <div className={styles.inputContainer}>
                         <label>ID Bahan</label>
                         <input
-                             type="text"
-                             value={idBahan}
-                             readOnly
+                            type="text"
+                            value={idBahan}
+                            readOnly
                         />
                     </div>
                     <div className={styles.inputContainer}>
                         <label>Nama Bahan</label>
                         <input
                             type="text"
-                            placeholder='Masukkan Nama Barang'
+                            placeholder="Masukkan Nama Barang"
                             value={namaBahan}
                             onChange={(e) => setNamaBahan(e.target.value)}
                             required
@@ -92,7 +89,7 @@ const AddStok: React.FC = () => {
                         <label>Jumlah</label>
                         <input
                             type="text"
-                            placeholder='Masukkan Jumlah Barang'
+                            placeholder="Masukkan Jumlah Barang"
                             value={jumlah}
                             onChange={(e) => {
                                 const value = e.target.value;
@@ -107,7 +104,7 @@ const AddStok: React.FC = () => {
                         <label>Satuan</label>
                         <input
                             type="text"
-                            placeholder='Masukkan Satuan Barang'
+                            placeholder="Masukkan Satuan Barang"
                             value={satuan}
                             onChange={(e) => setSatuan(e.target.value)}
                             required
@@ -117,7 +114,7 @@ const AddStok: React.FC = () => {
                         <label>Keterangan</label>
                         <input
                             type="text"
-                            placeholder='Masukkan Keterangan Barang'
+                            placeholder="Masukkan Keterangan Barang"
                             value={keterangan}
                             onChange={(e) => setKeterangan(e.target.value)}
                             required
@@ -129,8 +126,18 @@ const AddStok: React.FC = () => {
                     </div>
                 </form>
             </div>
+
+            {/* Modal for alert */}
+            {showModal && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modal}>
+                        <p>{modalMessage}</p>
+                        <button onClick={closeModal} className={styles.closeModalButton}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
- 
+
 export default AddStok;

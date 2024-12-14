@@ -23,6 +23,7 @@
     align-items: center; /* Menyelaraskan secara vertikal */
     margin-bottom: 20px; /* Jarak di bawah grup input */
     background-color: transparent;
+    flex-wrap: wrap; /* Agar elemen dapat dibungkus jika ruang terbatas */
 }
 
 /* Input Container untuk menyelaraskan ikon dan input */
@@ -32,9 +33,11 @@
     border: 1px solid rgba(201, 212, 225, 0.4); /* Batas untuk memberi efek berbingkai */
     background-color: rgba(231, 167, 177, 0.05);
     border-radius: 10px; /* Sudut melengkung untuk mempercantik */
-    padding: 15px; /* Menambah ruang di dalam */
+    padding: 8px 12px; /* Menambah ruang di dalam */
     flex: 1; /* Memungkinkan container untuk mengambil ruang yang ada */
-    height:28px;
+    max-width: 100%; /* Pastikan kontainer tidak lebih lebar dari layar */
+    height: 40px; /* Menyesuaikan tinggi untuk elemen pencarian */
+    margin-right: 10px; /* Jarak antar elemen */
 }
 
 /* Gaya untuk ikon pencarian */
@@ -51,15 +54,18 @@
     outline: none; /* Hilangkan outline saat difokuskan */
     background-color: transparent; /* Latar belakang transparan */
     flex: 1; /* Memungkinkan input mengambil sisa ruang yang ada */
-    height: 1000px;
+    height: 36px; /* Menyesuaikan tinggi input untuk proporsional */
+    font-size: 14px; /* Ukuran font yang lebih sesuai */
+    box-sizing: border-box; /* Memastikan padding dihitung dalam ukuran */
 }
 
+/* Jika ada tombol tambah, pastikan ada margin untuk pemisah */
 .addButton {
-    padding: 9px 10px; /* Jarak dalam */
-    background-color: #007bff; /* Warna tombol */
-    color: white; /* Warna teks */
-    border: none; /* Hapus border default */
-    border-radius: 8px; /* Sudut membulat */
+    padding: 9px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -67,7 +73,7 @@
 }
 
 .addButton:hover {
-    background-color: #0056b3; /* Warna tombol saat hover */
+    background-color: #0056b3;
 }
 
 .cardContainer {
@@ -80,7 +86,7 @@
 .card {
     max-height: 300px;
     height: 100%;
-    max-width: 200px;
+    max-width: 300px;
     width:100%;
     background-color: #fff;
     border-radius: 12px; /* Sudut membulat */

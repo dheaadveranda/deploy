@@ -39,14 +39,15 @@ const MenuDetail: React.FC = () => {
         <div className={styles.container}>
             <Sidebar activeMenu="Menu" onMenuClick={() => {}}/>
             <div className={styles.main}>
+            <h1  className={styles.pageTitle}>Detail Menu</h1>
                 <div className={styles.card}>
+                {/* <h1  className={styles.pageTitle}>Detail Menu</h1> */}
                     {/* Gambar Menu */}
                     {menu.Gambar && (
                         <img src={menu.Gambar} alt={menu.NamaMenu} className={styles.menuImage} />
                     )}
                     {/* Informasi Menu */}
                     <div className={styles.details}>
-                        <h2 className={styles.detailTitle}>Detail Menu</h2>
                         <div className={styles.detailGrid}>
                             <div className={styles.detailItem}>
                                 <span className={styles.label}>ID Menu:</span>

@@ -1,11 +1,8 @@
-/* Container Utama */
-
-
 /* Konten Utama */
 .main {
     flex: 1;
     padding: 10px;
-    background-color: #f5f6fa;
+    background-color: #ffffff;
     margin-left: 200px; /* Pastikan ukuran ini sesuai dengan sidebar */
     display: flex;
     flex-direction: column;
@@ -18,7 +15,7 @@
     font-size: 28px;
     font-weight: bold;
     color: #1c3853;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 /* Form */
@@ -29,20 +26,23 @@
     padding: 30px;
     border-radius: 16px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    margin-top: 30px;
 }
 
 /* Grup Input */
 .inputGroup {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     margin-bottom: 20px;
 }
 
 .inputGroup label {
     font-weight: bold;
     color: #333;
-    margin-bottom: 8px;
+    margin-right: 10px;
     font-family: 'Poppins', sans-serif;
+    width: 150px;
 }
 
 /* Input dan Select */
@@ -54,11 +54,27 @@
     border-radius: 8px;
     outline: none;
     transition: border-color 0.3s;
+    flex-grow: 1;
 }
 
 .input:focus,
 .select:focus {
     border-color: #375BB2;
+}
+
+.previewContainer {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.previewImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 /* File Input */

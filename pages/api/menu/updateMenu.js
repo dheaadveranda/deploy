@@ -35,6 +35,7 @@ handler.use(upload.single('Gambar'));
 handler.put((req, res) => {
     const { IDMenu, NamaMenu, HargaMenu, KategoriMenu } = req.body;
     const Gambar = req.file ? `uploads/${req.file.filename}` : null;
+    console.log('Gambar:', Gambar);
 
     if (!IDMenu || !NamaMenu || !HargaMenu || !KategoriMenu) {
         return res.status(400).json({ error: 'All fields are required' });

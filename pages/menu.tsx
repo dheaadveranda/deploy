@@ -47,12 +47,11 @@ const Menu: React.FC = () => {
         fetchMenus();
     }, [router]);
 
-    // Filter menu berdasarkan kategori dan pencarian
     const filteredMenus = menus.filter((menu) =>
         (selectedCategory === 'All' || menu.KategoriMenu === selectedCategory) &&
         (menu.NamaMenu.toLowerCase().includes(searchInput.toLowerCase()) ||
             menu.IDMenu.toLowerCase().includes(searchInput.toLowerCase()))
-    );
+    );    
 
     // Hapus menu berdasarkan ID
     const handleDelete = async (id: string) => {
@@ -107,16 +106,19 @@ const Menu: React.FC = () => {
                         <div className={styles.categoryContainer}>
                             {categories.map((category) => (
                                 <button
-                                    key={category}
-                                    className={`${styles.categoryButton} ${
-                                        selectedCategory === category
-                                            ? `${styles.categoryButtonActive} ${styles[`category${category.replace(/\s+/g, '')}`]}`
-                                            : styles[`category${category.replace(/\s+/g, '')}`]
-                                    }`}
-                                    onClick={() => setSelectedCategory(category)}
-                                >
-                                    {category}
-                                </button>
+                                key={category}
+                                className={`${styles.categoryButton} ${
+                                    selectedCategory === category
+                                        ? `${styles.categoryButtonActive} ${styles[`category${category.replace(/\s+/g, '')}`]}`
+                                        : styles[`category${category.replace(/\s+/g, '')}`]
+                                }`}
+                                onClick={() => {
+                                    console.log(`Category clicked: ${category}`);
+                                    setSelectedCategory(category);
+                                }}
+                            >
+                                {category}
+                            </button>                            
                             ))}
                         </div>
 

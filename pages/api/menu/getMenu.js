@@ -18,15 +18,13 @@ export default async function handler(req, res) {
 
             const menu = results[0];
 
-            if (menu.Gambar) {
-                // Jika path sudah lengkap (dimulai dengan '/public/uploads/'), ubah menjadi '/uploads/'
-                if (menu.Gambar.startsWith('/public/uploads/')) {
-                    menu.Gambar = `/uploads/${menu.Gambar}`;
-                } else if (!menu.Gambar.startsWith('/uploads/')) {
-                    // Jika hanya berupa nama file, tambahkan '/uploads/'
-                    menu.Gambar = `/uploads/${menu.Gambar}`;
-                }
-            }          
+            // if (menu.Gambar) {
+            //     if (menu.Gambar.startsWith('/uploads/')) {
+            //         menu.Gambar = `/uploads/${menu.Gambar}`;
+            //     } else if (!menu.Gambar.startsWith('/uploads/')) {
+            //         menu.Gambar = `/uploads/${menu.Gambar}`;
+            //     }
+            // }          
             console.log('Nama File Gambar before:', menu.Gambar);             
 
             res.status(200).json(menu);

@@ -1,23 +1,25 @@
-// pages/stok.tsx
-import styles from '../style/stok/stok.module.css'; // Pastikan jalur ini benar
+import styles from '../style/stok/stok.module.css';
 import { useState, useEffect } from 'react';
-import Sidebar from '../components/Sidebar'; // Pastikan jalur ini benar
-import { Icon } from '@iconify/react'; // Menggunakan Iconify untuk ikon
-import Link from 'next/link'; // Impor Link dari Next.js
- 
+import Sidebar from '../components/Sidebar';
+import { Icon } from '@iconify/react';
+import Link from 'next/link';
+
 interface Stok {
-    IDBahan: string;      
-    NamaBahan: string;    
-    Jumlah: string
+    IDBahan: string;
+    NamaBahan: string;
+    Jumlah: string;
     Satuan: string;
 }
- 
+
 const Stok: React.FC = () => {
     const [stoks, setStoks] = useState<Stok[]>([]);
     const [searchInput, setSearchInput] = useState<string>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [stoksPerPage] = useState<number>(7);
- 
+    const [showModal, setShowModal] = useState(false); // Modal visibility state
+    const [modalMessage, setModalMessage] = useState(''); // Message for modal
+    const [deletingId, setDeletingId] = useState(''); // ID of the item being deleted
+
     useEffect(() => {
         const fetchStoks = async () => {
             const response = await fetch('/api/stok/getStok');
@@ -26,48 +28,49 @@ const Stok: React.FC = () => {
                 return;
             }
             const data = await response.json();
-            console.log('Fetched Stoks:', data); // Debugging untuk melihat data
-            setStoks(data); // Menyimpan data di state
+            setStoks(data);
         };
- 
-        fetchStoks(); // Memanggil fungsi untuk mengambil data
+
+        fetchStoks(); 
     }, []);
- 
+
     const filteredStoks = stoks.filter((stok) =>
-            stok.NamaBahan.toLowerCase().includes(searchInput.toLowerCase()) ||
-            stok.IDBahan.toLowerCase().includes(searchInput.toLowerCase())
-        );
- 
-    // Logic untuk menampilkan pegawai sesuai dengan halaman yang aktif
+        stok.NamaBahan.toLowerCase().includes(searchInput.toLowerCase()) ||
+        stok.IDBahan.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
     const indexOfLastStok = currentPage * stoksPerPage;
     const indexOfFirstStok = indexOfLastStok - stoksPerPage;
     const currentStoks = filteredStoks.slice(indexOfFirstStok, indexOfLastStok);
 
-    // Fungsi untuk mengubah halaman aktif
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-    // Menghitung total halaman
     const totalPages = Math.ceil(filteredStoks.length / stoksPerPage);
- 
-    const handleDelete = async (id: string) => {
-        const response = confirm("Apakah Anda yakin ingin menghapus stok ini?");
-        if (response) {
-            const deleteResponse = await fetch(`/api/stok/deleteStok?id=${id}`, {
-                method: 'DELETE',
-            });
-    
-            if (deleteResponse.ok) {
-                alert('Stok berhasil dihapus');
-                setStoks((prev) => prev.filter((stok) => stok.IDBahan !== id)); // Menghapus stok dari state
-            } else {
-                alert('Gagal menghapus stok');
-            }
-        }
+
+    // Handle delete click and show confirmation modal
+    const handleDelete = (id: string) => {
+        setDeletingId(id);
+        setModalMessage('Apakah Anda yakin ingin menghapus stok ini?');
+        setShowModal(true); // Show the confirmation modal
     };
- 
+
+    const confirmDelete = async () => {
+        const response = await fetch(`/api/stok/deleteStok?id=${deletingId}`, { method: 'DELETE' });
+        if (response.ok) {
+            setStoks((prev) => prev.filter((stok) => stok.IDBahan !== deletingId)); // Remove deleted item
+            setModalMessage('Stok berhasil dihapus');
+        } else {
+            setModalMessage('Gagal menghapus stok');
+        }
+        setTimeout(() => setShowModal(false), 1500); // Close modal after 1.5s
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     return (
         <div className={styles.container}>
-            <Sidebar activeMenu="Stok" onMenuClick={() => { }}/>
+            <Sidebar activeMenu="Stok" onMenuClick={() => { }} />
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Stok</h1>
                 <hr className={styles.separator} />
@@ -78,8 +81,8 @@ const Stok: React.FC = () => {
                             type="text"
                             placeholder="Cari stok..."
                             className={styles.searchInput}
-                            value={searchInput} // Menghubungkan input dengan state
-                            onChange={(e) => setSearchInput(e.target.value)} // Memperbarui state saat input berubah
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                         />
                     </div>
                     <Link href="/stok/add" passHref>
@@ -122,9 +125,9 @@ const Stok: React.FC = () => {
                             <tr>
                                 <td colSpan={6} className={styles.noData}>
                                     <div style={{ textAlign: 'center' }}>
-                                       <span className="icon-[lucide--search]"></span>
-                                       <p>Data tidak ditemukan!</p>
-                                       <p>Coba masukkan kata kunci lain</p>
+                                        <span className="icon-[lucide--search]"></span>
+                                        <p>Data tidak ditemukan!</p>
+                                        <p>Coba masukkan kata kunci lain</p>
                                     </div>
                                 </td>
                             </tr>
@@ -132,17 +135,8 @@ const Stok: React.FC = () => {
                     </tbody>
                 </table>
 
-                {/* Pagination */}
                 <div className={styles.pagination}>
-                    {/* Tombol Previous */}
-                    <button
-                        onClick={() => paginate(currentPage - 1)}
-                        disabled={currentPage === 1}
-                    >
-                        Sebelumnya
-                    </button>
-
-                    {/* Tombol Halaman */}
+                    <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>Sebelumnya</button>
                     {Array.from({ length: totalPages }, (_, index) => (
                         <button
                             key={index}
@@ -152,18 +146,28 @@ const Stok: React.FC = () => {
                             {index + 1}
                         </button>
                     ))}
-
-                    {/* Tombol Next */}
-                    <button
-                        onClick={() => paginate(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                    >
-                        Berikutnya
-                    </button>
+                    <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>Berikutnya</button>
                 </div>
             </div>
+
+            {/* Modal for delete confirmation */}
+            {showModal && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modal}>
+                        <p>{modalMessage}</p>
+                        {modalMessage === 'Apakah Anda yakin ingin menghapus stok ini?' ? (
+                            <div>
+                                <button className={styles.confirmButton} onClick={confirmDelete}>Konfirmasi</button>
+                                <button className={styles.cancelButton} onClick={closeModal}>Batal</button>
+                            </div>
+                        ) : (
+                            <button className={styles.closeModalButton} onClick={closeModal} >Tutup</button>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
- 
+
 export default Stok;

@@ -1,23 +1,29 @@
 /* Konten Utama */
 .main {
     flex: 1;
-    padding: 10px; /* Padding lebih kecil */
+    padding: 10px;
     background-color: #ffffff;
-    margin-left: 200px; /* Menyesuaikan lebar sidebar */
+    margin-left: 200px; /* Pastikan ukuran ini sesuai dengan sidebar */
     display: flex;
-    justify-content: center; /* Memastikan konten terpusat secara horizontal */
-    align-items: center; /* Memastikan konten terpusat secara vertikal */
-    overflow: hidden; /* Menjaga konten tetap dalam ruang */
-    height: 100vh; /* Memastikan konten mengisi seluruh tinggi layar */
-    box-sizing: border-box; /* Menjamin tidak ada ruang ekstra di sekeliling */
+    flex-direction: column;
+    align-items: center;
+}
+
+.pageTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1c3853;
+    margin-top: 20px;
 }
 
 /* Card Utama */
 .card {
-    background-color: rgba(45, 72, 127, 0.3);
+    /* background-color: rgba(45, 72, 127, 0.3); */
+    /* border: 2px solid #1c3853; */
     padding: 15px; /* Kurangi padding lebih banyak */
     border-radius: 12px; /* Kurangi border-radius agar lebih padat */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Kurangi efek shadow */
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
     max-width: 700px; /* Lebar card lebih kecil */
     width: 100%;
     height: auto; /* Mengatur tinggi secara otomatis */
@@ -70,7 +76,7 @@
     font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: #f9f9f9;
+    background-color: rgba(45, 72, 127, 0.3);
     padding: 10px; /* Mengurangi padding lebih lanjut */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Mengurangi efek shadow */

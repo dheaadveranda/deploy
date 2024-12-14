@@ -65,13 +65,36 @@ const EditMenu: React.FC = () => {
             body: formData,
         });
 
+        console.log(response); 
+
         if (response.ok) {
             alert('Menu berhasil diubah');
-            router.push('/menu');
+            router.push('/menu').then(() => console.log('Navigated to /menu'));
         } else {
             alert('Gagal mengubah menu');
         }
     };
+
+    // const handleSubmit = async (e: React.FormEvent) => {
+    //     e.preventDefault();
+
+    //     const response = await fetch(`/api/menu/updateMenu`, {
+    //         method: 'PUT',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(menu), // Menyimpan data menu yang diubah
+    //     });
+
+    //     if (response.ok) {
+    //         alert('Menu berhasil diubah');
+    //         router.push('/menu'); // Kembali ke halaman menu
+    //     } else {
+    //         const error = await response.json();
+    //         alert(`Gagal mengubah menu: ${error.error}`);
+    //         console.error('Gagal', error);
+    //     }
+    // };
 
     if (!menu) return <div>Loading...</div>;
 
@@ -79,10 +102,8 @@ const EditMenu: React.FC = () => {
         <div className={styles.container}>
             <Sidebar activeMenu="Menu" onMenuClick={() => { }} />
             <div className={styles.main}>
-                <h1 className={styles.pageTitle}>Kelola Menu</h1>
-                <hr className={styles.separator} />
                 <h2 className={styles.editMenuTitle}>Edit Menu</h2>
-                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
                     <div className={styles.inputGroup}>
                         <label>ID Menu</label>
                         <input
@@ -135,7 +156,7 @@ const EditMenu: React.FC = () => {
                         {menu.Gambar && (
                             <div className={styles.previewContainer}>
                                 <img 
-                                    src={`/uploads/${menu.Gambar}`} 
+                                    src={menu.Gambar}
                                     alt="Preview Gambar" 
                                     className={styles.previewImage} 
                                 />
