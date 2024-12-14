@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Sidebar from '../../components/Sidebar'; 
+import styles from '../../style/menu/menuAdd.module.css';
 
 const AddMenu: React.FC = () => {
   const [idMenu, setIdMenu] = useState('');
@@ -35,7 +37,6 @@ const AddMenu: React.FC = () => {
       return;
     }
 
-    // Validasi harga untuk memastikan harga yang dimasukkan adalah angka
     const parsedPrice = parseFloat(harga);
     if (isNaN(parsedPrice)) {
       alert('Harga harus berupa angka yang valid!');
@@ -48,14 +49,8 @@ const AddMenu: React.FC = () => {
     formData.append('price', parsedPrice.toString());
     formData.append('category', kategori.trim());
     if (gambar) {
-      formData.append('image', gambar); // Kirim file gambar dengan nama 'image'
+      formData.append('image', gambar);
     }
-
-    console.log('FormData Contents:');
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
-
 
     const res = await fetch('/api/menu/addMenu', {
       method: 'POST',
@@ -72,112 +67,102 @@ const AddMenu: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px', background: '#f9f9f9', borderRadius: '10px' }}>
-      <h1 style={{ textAlign: 'center' }}>Tambah Menu</h1>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        {/* ID Menu */}
-        <div style={{ marginBottom: '20px' }}>
-          <label htmlFor="idMenu">ID Menu</label>
-          <input
-            type="text"
-            id="idMenu"
-            value={idMenu}
-            onChange={(e) => setIdMenu(e.target.value)}
-            placeholder="Masukkan ID Menu"
-            required
-            style={{ width: '100%', padding: '10px', marginTop: '5px' }}
-          />
-        </div>
+    <div className={styles.container}>
+      <Sidebar activeMenu="Menu" onMenuClick={() => { }} />
+      <div className={styles.main}>
+        <h1 className={styles.pageTitle}>Tambah Menu</h1>
+        <hr className={styles.separator} />
+        <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
+          {/* ID Menu */}
+          <div className={styles.inputGroup}>
+            <label htmlFor="idMenu">ID Menu</label>
+            <input
+              type="text"
+              id="idMenu"
+              value={idMenu}
+              onChange={(e) => setIdMenu(e.target.value)}
+              placeholder="Masukkan ID Menu"
+              required
+              className={styles.input}
+            />
+          </div>
 
-        {/* Nama Menu */}
-        <div style={{ marginBottom: '20px' }}>
-          <label htmlFor="namaMenu">Nama Menu</label>
-          <input
-            type="text"
-            id="namaMenu"
-            value={namaMenu}
-            onChange={(e) => setNamaMenu(e.target.value)}
-            placeholder="Masukkan Nama Menu"
-            required
-            style={{ width: '100%', padding: '10px', marginTop: '5px' }}
-          />
-        </div>
+          {/* Nama Menu */}
+          <div className={styles.inputGroup}>
+            <label htmlFor="namaMenu">Nama Menu</label>
+            <input
+              type="text"
+              id="namaMenu"
+              value={namaMenu}
+              onChange={(e) => setNamaMenu(e.target.value)}
+              placeholder="Masukkan Nama Menu"
+              required
+              className={styles.input}
+            />
+          </div>
 
-        {/* Harga */}
-        <div style={{ marginBottom: '20px' }}>
-          <label htmlFor="harga">Harga</label>
-          <input
-            type="number"
-            id="harga"
-            value={harga}
-            onChange={(e) => setHarga(e.target.value)}
-            placeholder="Masukkan Harga"
-            required
-            style={{ width: '100%', padding: '10px', marginTop: '5px' }}
-          />
-        </div>
+          {/* Harga */}
+          <div className={styles.inputGroup}>
+            <label htmlFor="harga">Harga</label>
+            <input
+              type="number"
+              id="harga"
+              value={harga}
+              onChange={(e) => setHarga(e.target.value)}
+              placeholder="Masukkan Harga"
+              required
+              className={styles.input}
+            />
+          </div>
 
-        {/* Kategori */}
-        <div style={{ marginBottom: '20px' }}>
-          <label htmlFor="kategori">Kategori</label>
-          <select
-            id="kategori"
-            value={kategori}
-            onChange={(e) => setKategori(e.target.value)}
-            style={{ width: '100%', padding: '10px', marginTop: '5px' }}
-          >
-            <option value="Coffee">Coffee</option>
-            <option value="Food">Food</option>
-            <option value="Signature Drink">Signature Drink</option>
-            <option value="Milkbased">Milkbased</option>
-            <option value="Tea">Tea</option>
-          </select>
-        </div>
+          {/* Kategori */}
+          <div className={styles.inputGroup}>
+            <label htmlFor="kategori">Kategori</label>
+            <select
+              id="kategori"
+              value={kategori}
+              onChange={(e) => setKategori(e.target.value)}
+              className={styles.select}
+            >
+              <option value="Coffee">Coffee</option>
+              <option value="Food">Food</option>
+              <option value="Signature Drink">Signature Drink</option>
+              <option value="Milkbased">Milkbased</option>
+              <option value="Tea">Tea</option>
+            </select>
+          </div>
 
-        {/* Upload Gambar */}
-        <div style={{ marginBottom: '20px' }}>
-          <label htmlFor="gambar">Upload Gambar</label>
-          <input
-            type="file"
-            id="gambar"
-            accept="image/*"
-            name="gambar"
-            onChange={handleFileChange}
-            style={{ width: '100%', marginTop: '5px' }}
-          />
-        </div>
+          {/* Upload Gambar */}
+          <div className={styles.inputGroup}>
+            <label htmlFor="gambar">Upload Gambar</label>
+            <input
+              type="file"
+              id="gambar"
+              accept="image/*"
+              name="gambar"
+              onChange={handleFileChange}
+              className={styles.fileInput}
+            />
+          </div>
 
-        {/* Tombol Simpan dan Batal */}
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <button
-            type="submit"
-            style={{
-              background: 'green',
-              color: 'white',
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Simpan
-          </button>
-          <button
-            type="button"
-            onClick={() => router.push('/menu')}
-            style={{
-              background: 'red',
-              color: 'white',
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Batal
-          </button>
-        </div>
-      </form>
+          {/* Tombol Simpan dan Batal */}
+          <div className={styles.buttonGroup}>
+            <button
+              type="submit"
+              className={styles.saveButton}
+            >
+              Simpan
+            </button>
+            <button
+              type="button"
+              onClick={() => router.push('/menu')}
+              className={styles.cancelButton}
+            >
+              Batal
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,15 +1,12 @@
 /* Container Utama */
-.container {
-    display: flex;
-    height: 100vh;
-}
+
 
 /* Konten Utama */
 .main {
     flex: 1;
-    padding: 40px;
+    padding: 10px;
     background-color: #f5f6fa;
-    margin-left: 240px; /* Pastikan ukuran ini sesuai dengan sidebar */
+    margin-left: 200px; /* Pastikan ukuran ini sesuai dengan sidebar */
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -3,7 +3,7 @@ import pool from '../../../lib/db'; // Pastikan jalur ini benar
  
 export default async function handler(req, res) {
     if (req.method === 'DELETE') {
-        // Ambil IDPegawai dari query parameter, bukan body
+        // Ambil IDStok dari query parameter, bukan body
         const { id } = req.query;
  
         // Validasi apakah id ada
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
             const query = 'DELETE FROM stok WHERE IDBahan = ?';
             const values = [id];
  
-            // Menjalankan query untuk menghapus pegawai
+            // Menjalankan query untuk menghapus stok
             const [result] = await pool.query(query, values);
  
             if (result.affectedRows === 0) {

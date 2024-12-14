@@ -1,4 +1,3 @@
-// pages/menu/edit/[id].tsx
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Sidebar from '../../../components/Sidebar'; 
@@ -29,15 +28,8 @@ const EditMenu: React.FC = () => {
             }
         };
 
-        const fetchUserRole = async () => {
-            const response = await fetch('/api/authUser');
-            if (response.ok) {
-            }
-        };
-
         if (id) {
             fetchMenuDetail();
-            fetchUserRole();
         }
     }, [id]);
 
@@ -85,21 +77,22 @@ const EditMenu: React.FC = () => {
 
     return (
         <div className={styles.container}>
-            <Sidebar activeMenu="Menu" onMenuClick={() => { }}/>
+            <Sidebar activeMenu="Menu" onMenuClick={() => { }} />
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Menu</h1>
                 <hr className={styles.separator} />
                 <h2 className={styles.editMenuTitle}>Edit Menu</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>ID Menu</label>
                         <input
                             type="text"
                             value={menu.IDMenu}
                             readOnly
+                            className={styles.input}
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Nama Menu</label>
                         <input
                             type="text"
@@ -107,9 +100,10 @@ const EditMenu: React.FC = () => {
                             value={menu.NamaMenu}
                             onChange={handleChange}
                             required
+                            className={styles.input}
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Harga</label>
                         <input
                             type="text"
@@ -117,15 +111,17 @@ const EditMenu: React.FC = () => {
                             value={menu.HargaMenu}
                             onChange={handleChange}
                             required
+                            className={styles.input}
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Kategori</label>
                         <select
                             name="KategoriMenu"
                             value={menu.KategoriMenu}
                             onChange={handleChange}
                             required
+                            className={styles.select}
                         >
                             <option value="Coffee">Coffee</option>
                             <option value="Food">Food</option>
@@ -134,7 +130,7 @@ const EditMenu: React.FC = () => {
                             <option value="Tea">Tea</option>
                         </select>
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Gambar</label>
                         {menu.Gambar && (
                             <div className={styles.previewContainer}>
@@ -150,11 +146,11 @@ const EditMenu: React.FC = () => {
                             type="file"
                             name="Gambar"
                             onChange={handleFileChange}
-                            accept="image/*" // Hanya biarkan tipe file gambar
-                            className={styles.fileInput} // Anda bisa menambahkan style baru jika ingin pada input file
+                            accept="image/*"
+                            className={styles.fileInput}
                         />
                     </div>
-                    <div className={styles.buttonContainer}>
+                    <div className={styles.buttonGroup}>
                         <button type="submit" className={styles.saveButton}>Simpan</button>
                         <button type="button" onClick={() => router.push('/menu')} className={styles.cancelButton}>Batal</button>
                     </div>

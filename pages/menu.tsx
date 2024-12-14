@@ -56,27 +56,20 @@ const Menu: React.FC = () => {
 
     // Hapus menu berdasarkan ID
     const handleDelete = async (id: string) => {
-        const response = confirm('Apakah Anda yakin ingin menghapus menu ini?');
+        const response = confirm("Apakah Anda yakin ingin menghapus menu ini?");
         if (response) {
-            try {
-                setIsLoading(true);
-                const deleteResponse = await fetch(`/api/menu/deleteMenu?id=${id}`, {
-                    method: 'DELETE',
-                });
+            const deleteResponse = await fetch(`/api/menu/deleteMenu?id=${id}`, {
+                method: 'DELETE',
+            });
 
-                if (deleteResponse.ok) {
-                    alert('Menu berhasil dihapus');
-                    setMenus((prev) => prev.filter((menu) => menu.IDMenu !== id));
-                } else {
-                    alert('Gagal menghapus menu');
-                }
-            } catch (error) {
-                console.error('Error deleting menu:', error);
-            } finally {
-                setIsLoading(false);
+            if (deleteResponse.ok) {
+                alert('Menu berhasil dihapus');
+                setMenus((prev) => prev.filter((menu) => menu.IDMenu !== id)); // Menghapus menu dari state
+            } else {
+                alert('Gagal menghapus menu');
             }
         }
-    };
+    };          
 
     // Fungsi untuk toggle dropdown aksi (Edit/Delete)
     const toggleDropdown = (id: string) => {

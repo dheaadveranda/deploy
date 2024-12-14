@@ -1,23 +1,35 @@
-// pages/api/deleteMenu.js
-import connection from '../../../lib/db'; // Mengimpor koneksi ke database
-
-export default function handler(req, res) {
-    const { id } = req.query; // Mendapatkan ID dari parameter query
-
-    if (req.method === 'DELETE') { // Memastikan hanya menerima metode DELETE
-        connection.query('DELETE FROM menu WHERE IDMenu = ?', [id], (err, results) => {
-            if (err) {
-                console.error('Error deleting menu:', err);
-                return res.status(500).json({ error: 'Database query failed' });
-            }
-            if (results.affectedRows > 0) { // Memeriksa apakah ada menu yang dihapus
-                return res.status(200).json({ message: 'Menu deleted successfully' });
-            } else {
+// pages/api/menu/deleteMenu.js
+import pool from '../../../lib/db'; // Pastikan jalur ini benar
+ 
+export default async function handler(req, res) {
+    if (req.method === 'DELETE') {
+        // Ambil IDPegawai dari query parameter, bukan body
+        const { id } = req.query;
+ 
+        // Validasi apakah id ada
+        if (!id) {
+            return res.status(400).json({ error: 'IDMenu is required' });
+        }
+ 
+        try {
+            const query = 'DELETE FROM menu WHERE IDMenu = ?';
+            const values = [id];
+ 
+            // Menjalankan query untuk menghapus pegawai
+            const [result] = await pool.query(query, values);
+ 
+            if (result.affectedRows === 0) {
                 return res.status(404).json({ error: 'Menu not found' });
             }
-        });
+ 
+            return res.status(200).json({ message: 'Menu deleted successfully!' });
+        } catch (err) {
+            console.error('Error deleting menu:', err); // Logging error
+            return res.status(500).json({ error: 'Failed to delete menu' }); // Mengembalikan error
+        }
     } else {
-        res.setHeader('Allow', ['DELETE']); // Mengatur metode yang diizinkan
-        return res.status(405).end(`Method ${req.method} Not Allowed`); // Mengembalikan status metode tidak diperbolehkan
+        // Pastikan hanya metode DELETE yang diizinkan
+        res.setHeader('Allow', ['DELETE']);
+        return res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 }
