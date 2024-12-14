@@ -14,7 +14,6 @@ export default async function handler(req, res) {
       keepExtensions: true, // Simpan ekstensi file
       maxFileSize: 5 * 1024 * 1024, // Maksimal ukuran file 5MB
     });
-    // console.log('Files received by formidable:', files);
 
     form.parse(req, async (err, fields, files) => {
       if (err) {
@@ -25,29 +24,15 @@ export default async function handler(req, res) {
       console.log('Fields received by formidable:', fields);
       console.log('Files received by formidable:', files);
 
-      // if (!files.image || !files.image.newFilename) {
-      //   console.error('File upload is missing or invalid');
-      //   return res.status(400).json({ error: 'File upload is required or invalid' });
-      // }
-
-      // Extract fields from the form
       const id = fields.id?.[0];
       const name = fields.name?.[0];
       const price = fields.price?.[0];
       const category = fields.category?.[0];
 
       // Handle the image
-      const image = files.image && files.image.newFilename
-        ? `/uploads/${files.image.newFilename}`
-        : '/uploads/default.jpg';
-      // Use default if no file
-      // const image = files.image; // Use default if no file
-
-      console.log('Nama File Gambar:', image); // Debugging log
-      console.log('Files:', files);
-      console.log('Files.image:', files.image);
-      console.log('Files.image.newFilename:', files.image?.newFilename);
-
+      const image = files.image && files.image[0]
+        ? `/uploads/${files.image[0].newFilename}` // Path yang benar, tanpa "public"
+        : '/uploads/default.jpg'; // Default jika tidak ada gambar
 
       // Validate required fields
       if (!id || !name || !price || !category) {
@@ -59,8 +44,6 @@ export default async function handler(req, res) {
       if (isNaN(priceValue)) {
         return res.status(400).json({ error: 'Harga harus berupa angka!' });
       }
-
-      console.log('Data yang akan dimasukkan:', { id, name, priceValue, category, image }); // Debugging log
 
       try {
         // Insert data into the database

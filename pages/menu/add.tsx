@@ -25,7 +25,7 @@ const AddMenu: React.FC = () => {
 
     const categoryPrefix = kategori === 'Coffee' ? 'MNUC' :
       kategori === 'Food' ? 'MNUF' :
-        kategori === 'Signature Drink' ? 'MNUSD' :
+        kategori === 'Signature Drink' ? 'MNUS' :
           kategori === 'Milkbased' ? 'MNUM' :
             kategori === 'Tea' ? 'MNUT' : '';
 
