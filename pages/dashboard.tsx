@@ -33,28 +33,27 @@ interface DashboardData {
 
 const Dashboard: React.FC = () => {
     const [activeMenu, setActiveMenu] = useState<string>('Dashboard');
-    const [dashboardData, setDashboardData] = useState<DashboardData | null>(null); // Specify DashboardData type
+    const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
     const [yearFilter, setYearFilter] = useState<string>('2024');
     const [monthFilter, setMonthFilter] = useState<number>(11);
     const [showMonthlyRevenue, setShowMonthlyRevenue] = useState<boolean>(true);
-    const [username, setUsername] = useState<string>(''); // Menyimpan username
+    const [username, setUsername] = useState<string>('');
 
-    // Mengambil username dan role dari sessionStorage
     useEffect(() => {
         const storedUsername = sessionStorage.getItem('username');
-
         if (storedUsername) {
             setUsername(storedUsername);
         }
 
-        // Ambil data dashboard dari API
+        // Fetch data dashboard from API
         const fetchDashboardData = async () => {
             try {
                 const response = await fetch('/api/dashboard/getDashboard');
                 if (!response.ok) {
                     throw new Error('Failed to fetch dashboard data');
                 }
-                const data: DashboardData = await response.json(); // Ensure the data follows DashboardData type
+                const data: DashboardData = await response.json();
+                console.log('Dashboard Data:', data);
                 setDashboardData(data);
             } catch (error) {
                 console.error('Error fetching dashboard data:', error);
@@ -64,16 +63,15 @@ const Dashboard: React.FC = () => {
         fetchDashboardData();
     }, []);
 
-    // Menyusun data untuk grafik pendapatan per bulan
     const getRevenueChartData = () => {
         if (!dashboardData || !dashboardData.revenueData) return {
             labels: [],
             datasets: [],
-        }; 
+        };
 
         const filteredRevenueData = dashboardData.revenueData.filter(
-            (data: RevenueData) => data.year === parseInt(yearFilter)
-        );
+            (data: RevenueData) => data.year === parseInt(yearFilter) && data.month === monthFilter
+        );        
 
         const labels = showMonthlyRevenue
             ? filteredRevenueData.map((data: RevenueData) => `${data.month}/${data.year}`)
@@ -89,7 +87,7 @@ const Dashboard: React.FC = () => {
                 label: 'Pendapatan',
                 data: data,
                 borderColor: '#375BB2',
-                backgroundColor: 'rgba(55, 91, 178)',
+                backgroundColor: 'rgba(55, 91, 178, 0.2)',
                 borderWidth: 1,
             }] : [],
         };
@@ -110,7 +108,7 @@ const Dashboard: React.FC = () => {
             <div className={styles.main}>
                 <div className={styles.header}>
                     <div className={styles.headerContent}>
-                        <p>Welcome, {username}😜💐✨</p> {/* Menampilkan nama pengguna */}
+                        <p>Welcome, {username} 😜💐✨</p>
                     </div>
                 </div>
                 <h1 className={styles.pageTitle}>Dashboard</h1>

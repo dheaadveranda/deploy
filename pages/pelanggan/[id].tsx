@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Sidebar from '../../components/Sidebar'; // Pastikan jalur ke Sidebar benar
 import styles from '../../style/pelanggan/pelangganDetail.module.css'; // Pastikan jalur ke file benar
 
-interface Customer {
+interface Customer { 
     IDPelanggan: string;
     NamaPelanggan: string;
     NoHP: string;

@@ -95,3 +95,11 @@
     color: #777;
     margin-top: 40px;
 }
+
+.chartContainer {
+    width: 100%; /* Pastikan lebar 100% dari container */
+    height: 400px; /* Tentukan tinggi yang sesuai */
+    margin-top: 20px; /* Jarak antara elemen-elemen lainnya */
+    /* background-color: #375BB2; */
+}
+
