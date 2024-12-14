@@ -1,8 +1,7 @@
-// pages/pelanggan/edit/[id].tsx
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Sidebar from '../../../components/Sidebar';
-import styles from '../../../style/pelanggan/pelangganAdd.module.css';
+import styles from '../../../style/pelanggan/pelangganAdd.module.css'; // Menggunakan CSS yang sama
 
 interface Customer {
     IDPelanggan: string;
@@ -16,8 +15,8 @@ interface Customer {
 
 const EditPelanggan: React.FC = () => {
     const router = useRouter();
-    const { id } = router.query; // Mengambil ID dari URL
-    const [customer, setCustomer] = useState<Customer | null>(null); // State untuk pelanggan
+    const { id } = router.query;
+    const [customer, setCustomer] = useState<Customer | null>(null);
 
     useEffect(() => {
         const fetchPelangganDetail = async () => {
@@ -30,16 +29,8 @@ const EditPelanggan: React.FC = () => {
             }
         };
 
-        const fetchUserRole = async () => {
-            const response = await fetch('/api/authUser'); // Ambil role pengguna
-            if (response.ok) {
-
-            }
-        };
-
         if (id) {
             fetchPelangganDetail();
-            fetchUserRole(); // Ambil role pengguna saat ID tersedia
         }
     }, [id]);
 
@@ -47,7 +38,7 @@ const EditPelanggan: React.FC = () => {
         if (customer) {
             setCustomer({
                 ...customer,
-                [e.target.name]: e.target.value // Update sesuai input yang diubah
+                [e.target.name]: e.target.value // Update field sesuai input
             });
         }
     };
@@ -65,7 +56,7 @@ const EditPelanggan: React.FC = () => {
 
         if (response.ok) {
             alert('Pelanggan berhasil diubah');
-            router.push('/pelanggan'); // Kembali ke halaman pelanggan setelah berhasil
+            router.push('/pelanggan'); // Kembali ke halaman pelanggan
         } else {
             const error = await response.json();
             alert(`Gagal mengubah pelanggan: ${error.error}`);
@@ -73,25 +64,23 @@ const EditPelanggan: React.FC = () => {
         }
     };
 
-    if (!customer) return <div>Loading...</div>; // Tampilkan loading jika data belum siap
+    if (!customer) return <div>Loading...</div>;
 
     return (
-        <div className={styles.container}>
+        <div className={styles.main}>
             <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }} />
-            <div className={styles.main}>
-                <h1 className={styles.pageTitle}>Kelola Pelanggan</h1>
-                <hr className={styles.separator} />
-                <h2 className={styles.pelangganTitle}>Edit Pelanggan</h2>
+            <div className={styles.content}>
+                <h1 className={styles.pageTitle}>Edit Pelanggan</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>ID Pelanggan</label>
                         <input
                             type="text"
                             value={customer.IDPelanggan}
-                            readOnly // ID seharusnya tidak dapat diedit
+                            readOnly // ID tidak bisa diedit
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Nama Pelanggan</label>
                         <input
                             type="text"
@@ -101,8 +90,8 @@ const EditPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
-                        <label>No HP:</label>
+                    <div className={styles.inputGroup}>
+                        <label>No HP</label>
                         <input
                             type="text"
                             name="NoHP"
@@ -111,17 +100,17 @@ const EditPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Email</label>
                         <input
-                            type="text"
+                            type="email"
                             name="Email"
                             value={customer.Email}
                             onChange={handleChange}
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Alamat</label>
                         <input
                             type="text"
@@ -131,17 +120,17 @@ const EditPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
-                        <label>Tanggal Bergabung:</label>
+                    <div className={styles.inputGroup}>
+                        <label>Tanggal Daftar</label>
                         <input
                             type="date"
                             name="TglDaftar"
-                            value={customer.TglDaftar} // Format YYYY-MM-DD
+                            value={customer.TglDaftar}
                             onChange={handleChange}
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Total Poin</label>
                         <input
                             type="text"
@@ -153,7 +142,13 @@ const EditPelanggan: React.FC = () => {
                     </div>
                     <div className={styles.buttonContainer}>
                         <button type="submit" className={styles.saveButton}>Simpan</button>
-                        <button type="button" onClick={() => router.push('/pelanggan')} className={styles.cancelButton}>Batal</button>
+                        <button
+                            type="button"
+                            onClick={() => router.push('/pelanggan')}
+                            className={styles.cancelButton}
+                        >
+                            Batal
+                        </button>
                     </div>
                 </form>
             </div>

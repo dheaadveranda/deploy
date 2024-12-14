@@ -1,9 +1,8 @@
-//pages/pelanggan/add.tsx
 import { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar';
 import styles from '../../style/pelanggan/pelangganAdd.module.css';
 import { useRouter } from 'next/router';
- 
+
 const AddPelanggan: React.FC = () => {
     const router = useRouter();
     const [idPelanggan, setIdPelanggan] = useState('');
@@ -13,36 +12,34 @@ const AddPelanggan: React.FC = () => {
     const [alamat, setAlamat] = useState('');
     const [tglDaftar, setTglDaftar] = useState('');
     const [totalPoin, setTotalPoin] = useState('');
- 
+
     // Fetch latest ID and generate new ID
     useEffect(() => {
         const fetchLatestID = async () => {
             const response = await fetch('/api/pelanggan/getLatestID');
             const data = await response.json();
-   
+
             let newID = 'CUST0001';  // Default ID pertama
-   
+
             if (data.latestID) {
                 // Pastikan ID terakhir valid
                 const latestID = data.latestID;
                 const numberPart = parseInt(latestID.substring(4), 10);  // Ambil angka setelah "CUST"
-               
                 if (!isNaN(numberPart)) {
                     const newNumberPart = numberPart + 1;  // Increment angka tersebut
                     newID = `CUST${newNumberPart.toString().padStart(4, '0')}`;  // Format menjadi CUSTXXXX
                 }
             }
-   
+
             setIdPelanggan(newID);
         };
-   
+
         fetchLatestID();
     }, []);
-   
- 
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
- 
+
         const response = await fetch('/api/pelanggan/addCustomer', {
             method: 'POST',
             headers: {
@@ -58,7 +55,7 @@ const AddPelanggan: React.FC = () => {
                 TotalPoin: totalPoin,
             }),
         });
- 
+
         if (response.ok) {
             alert('Pelanggan berhasil ditambahkan');
             router.push('/pelanggan');
@@ -68,20 +65,18 @@ const AddPelanggan: React.FC = () => {
             console.error('Error:', errorMessage);
         }
     };
- 
+
     return (
-        <div className={styles.container}>
-            <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }}/>
-            <div className={styles.main}>
-                <h1 className={styles.pageTitle}>Kelola Pelanggan</h1>
-                <hr className={styles.separator} />
-                <h2 className={styles.addPelangganTitle}>Tambah Pelanggan</h2>
+        <div className={styles.main}>
+            <Sidebar activeMenu="Pelanggan" onMenuClick={() => { }} />
+            <div className={styles.content}>
+                <h1 className={styles.pageTitle}>Tambah Pelanggan</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>ID Pelanggan</label>
                         <input type="text" value={idPelanggan} readOnly />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Nama Pelanggan</label>
                         <input
                             type="text"
@@ -91,7 +86,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>No HP</label>
                         <input
                             type="text"
@@ -101,7 +96,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Email</label>
                         <input
                             type="email"
@@ -111,7 +106,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Alamat</label>
                         <input
                             type="text"
@@ -121,7 +116,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Tanggal Daftar</label>
                         <input
                             type="date"
@@ -130,7 +125,7 @@ const AddPelanggan: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
                         <label>Total Poin</label>
                         <input
                             type="text"
@@ -146,9 +141,7 @@ const AddPelanggan: React.FC = () => {
                         />
                     </div>
                     <div className={styles.buttonContainer}>
-                        <button type="submit" className={styles.saveButton}>
-                            Simpan
-                        </button>
+                        <button type="submit" className={styles.saveButton}>Simpan</button>
                         <button
                             type="button"
                             onClick={() => router.push('/pelanggan')}
@@ -162,5 +155,5 @@ const AddPelanggan: React.FC = () => {
         </div>
     );
 };
- 
+
 export default AddPelanggan;
