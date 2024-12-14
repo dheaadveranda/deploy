@@ -577,8 +577,8 @@ const Transaksi: React.FC = () => {
                             {/* Ikon untuk Menerapkan Diskon */}
                             <Icon
                                 icon="uim:process"
-                                width="24"
-                                height="24"
+                                width="18"
+                                height="18"
                                 className={styles.discountIcon}
                                 onClick={handleApplyDiscount}
                             />
