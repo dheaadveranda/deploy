@@ -1,3 +1,4 @@
+// pages/api/menu/updateMenu.js
 import connection from '../../../lib/db';
 import multer from 'multer';
 import nextConnect from 'next-connect';
@@ -33,7 +34,7 @@ handler.use(upload.single('Gambar'));
 
 handler.put((req, res) => {
     const { IDMenu, NamaMenu, HargaMenu, KategoriMenu } = req.body;
-    const Gambar = req.file ? `public/uploads/${req.file.filename}` : null;
+    const Gambar = req.file ? `uploads/${req.file.filename}` : null;
 
     if (!IDMenu || !NamaMenu || !HargaMenu || !KategoriMenu) {
         return res.status(400).json({ error: 'All fields are required' });
