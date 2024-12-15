@@ -95,7 +95,7 @@ const Menu: React.FC = () => {
 
     return (
         <div className={styles.container}>
-            <Sidebar activeMenu="menu" onMenuClick={() => {}}/>
+            <Sidebar activeMenu="Menu" onMenuClick={() => {}}/>
             <div className={styles.main}>
                 <h1 className={styles.pageTitle}>Kelola Menu</h1>
                 {isLoading ? (

@@ -68,11 +68,12 @@ const EditMenu: React.FC = () => {
         console.log(response); 
 
         if (response.ok) {
-            alert('Menu berhasil diubah');
-            router.push('/menu').then(() => console.log('Navigated to /menu'));
+            await router.push('/menu');  // Navigasi terlebih dahulu
+            alert('Menu berhasil diubah');  // Kemudian tampilkan alert
+            console.log('Navigated to /menu');
         } else {
             alert('Gagal mengubah menu');
-        }
+        }        
     };
 
     // const handleSubmit = async (e: React.FormEvent) => {
