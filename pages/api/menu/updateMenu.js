@@ -35,7 +35,7 @@ handler.use(upload.single('Gambar'));
 // if(req.method === 'PUT') {
 handler.put((req, res) => {
     const { IDMenu, NamaMenu, HargaMenu, KategoriMenu } = req.body;
-    const Gambar = req.file ? `uploads/${req.file.filename}` : null;
+    const Gambar = req.file ? `/uploads/${req.file.filename}` : null;
     console.log('Gambar:', Gambar);
 
     if (!IDMenu || !NamaMenu || !HargaMenu || !KategoriMenu) {
