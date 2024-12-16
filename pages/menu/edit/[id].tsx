@@ -1,7 +1,8 @@
+/* pages/menu/edit/[id].tsx */
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Sidebar from '../../../components/Sidebar'; 
-import styles from '../../../style/menu/menuAdd.module.css'; 
+import Sidebar from '../../../components/Sidebar';
+import styles from '../../../style/menu/menuAdd.module.css';
 
 interface Menu {
     IDMenu: string;
@@ -50,7 +51,7 @@ const EditMenu: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         const formData = new FormData();
         formData.append('IDMenu', menu?.IDMenu || '');
         formData.append('NamaMenu', menu?.NamaMenu || '');
@@ -65,7 +66,7 @@ const EditMenu: React.FC = () => {
             body: formData,
         });
 
-        console.log(response); 
+        console.log(response);
 
         if (response.ok) {
             await router.push('/menu');  // Navigasi terlebih dahulu
@@ -73,7 +74,7 @@ const EditMenu: React.FC = () => {
             console.log('Navigated to /menu');
         } else {
             alert('Gagal mengubah menu');
-        }        
+        }
     };
 
     // const handleSubmit = async (e: React.FormEvent) => {
@@ -156,10 +157,10 @@ const EditMenu: React.FC = () => {
                         <label>Gambar</label>
                         {menu.Gambar && (
                             <div className={styles.previewContainer}>
-                                <img 
+                                <img
                                     src={menu.Gambar}
-                                    alt="Preview Gambar" 
-                                    className={styles.previewImage} 
+                                    alt="Preview Gambar"
+                                    className={styles.previewImage}
                                 />
                                 <p>Recent</p> {/* Menunjukkan gambar terakhir yang diupload */}
                             </div>
