@@ -35,7 +35,7 @@ const Dashboard: React.FC = () => {
     const [activeMenu, setActiveMenu] = useState<string>('Dashboard');
     const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
     const [yearFilter, setYearFilter] = useState<string>('2024');
-    const [monthFilter, setMonthFilter] = useState<number>(11);
+    const [monthFilter, setMonthFilter] = useState<number>(12);
     const [showMonthlyRevenue, setShowMonthlyRevenue] = useState<boolean>(true);
     const [username, setUsername] = useState<string>('');
 
